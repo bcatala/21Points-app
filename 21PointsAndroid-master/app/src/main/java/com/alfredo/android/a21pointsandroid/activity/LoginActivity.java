@@ -32,7 +32,7 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
     private View mLoginFormView;
-
+    private Button GotoMenu;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,7 +102,10 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
             // form field with an error.
             focusView.requestFocus();
         } else {
+
             RestAPIManager.getInstance().getUserToken(email, password, this);
+            setContentView(R.layout.activity_premenu);
+
         }
     }
 
