@@ -103,7 +103,8 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
             focusView.requestFocus();
         } else {
 
-            RestAPIManager.getInstance().getUserToken(email, password, this);
+
+            //RestAPIManager.getInstance().getUserToken(email, password, this);
             setContentView(R.layout.activity_premenu);
 
         }

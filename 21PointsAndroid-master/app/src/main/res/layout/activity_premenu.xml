@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+    <GraphView
+        android:layout_width="match_parent"
+        android:layout_height="200dip"
+        android:id="@+id/graph" />
     <Button
         android:id="@+id/GotoMenu"
         style="?android:textAppearanceSmall"
@@ -14,6 +17,7 @@
         android:layout_marginTop="50dp"
         android:text="Go to Menu"
         android:textStyle="bold" />
+
 
 
 </android.support.constraint.ConstraintLayout>
