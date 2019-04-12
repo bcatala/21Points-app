@@ -2,6 +2,7 @@ package com.alfredo.android.a21pointsandroid.activity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -102,9 +103,11 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
             // form field with an error.
             focusView.requestFocus();
         } else {
-
-            RestAPIManager.getInstance().getUserToken(email, password, this);
             setContentView(R.layout.activity_premenu);
+            //RestAPIManager.getInstance().getUserToken(email, password, this);
+            Intent i = new Intent(LoginActivity.this, preMenuActivity.class);
+           // startActivity(i);
+
 
         }
     }
