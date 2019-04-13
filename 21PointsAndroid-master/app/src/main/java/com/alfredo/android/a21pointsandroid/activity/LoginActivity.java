@@ -2,6 +2,7 @@ package com.alfredo.android.a21pointsandroid.activity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -143,6 +144,7 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
     @Override
     public void onLoginSuccess(UserToken userToken) {
 
+
         Log.d("21Points", "onLoginSuccess OK " + userToken.getIdToken());
 
         new AlertDialog.Builder(this)
@@ -165,6 +167,8 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
 
         RestAPIManager.getInstance().postPoints(new Points("2019-03-14",1,1,1), this);
 
+        Intent i = new Intent(LoginActivity.this, preMenuActivity.class);
+        startActivity(i);
     }
 
     @Override
