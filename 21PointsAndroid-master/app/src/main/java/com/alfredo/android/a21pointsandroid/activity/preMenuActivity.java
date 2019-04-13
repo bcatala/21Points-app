@@ -1,5 +1,6 @@
 package com.alfredo.android.a21pointsandroid.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -21,7 +22,8 @@ public class preMenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                // setContentView(R.layout.activity_main);
-
+                Intent i = new Intent(preMenuActivity.this, MainMenu.class);
+                startActivity(i);
             }
 
         });
