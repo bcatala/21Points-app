@@ -42,5 +42,14 @@ public class MainMenu extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        Button mAddWeightButton = (Button) findViewById(R.id.add_weight_button);
+        mAddWeightButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainMenu.this, AddWeight.class);
+                startActivity(i);
+            }
+        });
     }
 }
