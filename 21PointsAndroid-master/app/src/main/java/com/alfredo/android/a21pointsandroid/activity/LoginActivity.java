@@ -103,9 +103,13 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
             // form field with an error.
             focusView.requestFocus();
         } else {
+            Intent intent = new Intent(LoginActivity.this, preMenuActivity.class);
+            intent.putExtra("email", email);
+            intent.putExtra("c", password);
+            startActivity(intent);
 
-            RestAPIManager.getInstance().getUserToken(email, password, this);
-            setContentView(R.layout.activity_premenu);
+           // RestAPIManager.getInstance().getUserToken(email, password, this);
+            // setContentView(R.layout.activity_premenu);
 
         }
     }
