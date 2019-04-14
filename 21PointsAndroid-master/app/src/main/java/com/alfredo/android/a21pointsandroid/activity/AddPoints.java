@@ -13,5 +13,6 @@ public class AddPoints extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addpoints);
 
+
     }
 }

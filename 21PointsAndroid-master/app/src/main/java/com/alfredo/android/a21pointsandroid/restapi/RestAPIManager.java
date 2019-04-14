@@ -1,5 +1,8 @@
 package com.alfredo.android.a21pointsandroid.restapi;
 
+import android.widget.TextView;
+
+import com.alfredo.android.a21pointsandroid.R;
 import com.alfredo.android.a21pointsandroid.model.Points;
 import com.alfredo.android.a21pointsandroid.restapi.callback.RegisterAPICallback;
 import com.alfredo.android.a21pointsandroid.model.UserData;
@@ -44,7 +47,6 @@ public class RestAPIManager {
         UserData userData = new UserData(username, password);
         Call<UserToken> call = restApiService.requestToken(userData);
 
-        
 
         call.enqueue(new Callback<UserToken>() {
             @Override

@@ -24,6 +24,8 @@ import com.alfredo.android.a21pointsandroid.R;
 import com.alfredo.android.a21pointsandroid.restapi.RestAPIManager;
 import com.alfredo.android.a21pointsandroid.model.UserToken;
 
+import retrofit2.Call;
+
 /**
  * A login screen that offers login via email/password.
  */
@@ -62,7 +64,6 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
 
         mLoginFormView = findViewById(R.id.login_form);
     }
-
     /**
      * Attempts to sign in or register the account specified by the login form.
      * If there are form errors (invalid email, missing fields, etc.), the
@@ -76,6 +77,8 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
         // Store values at the time of the login attempt.
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
+
+        LoginAPICallBack hola;
 
         boolean cancel = false;
         View focusView = null;
@@ -106,6 +109,7 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
             Intent intent = new Intent(LoginActivity.this, preMenuActivity.class);
             intent.putExtra("email", email);
             intent.putExtra("c", password);
+
             startActivity(intent);
 
            // RestAPIManager.getInstance().getUserToken(email, password, this);

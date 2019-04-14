@@ -28,6 +28,11 @@ public class MainMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainmenu);
 
+
+
+        TextView textView4= findViewById(R.id.logged_name);
+        textView4.setText("You are logged in as " + getIntent().getStringExtra("username"));
+
         // Set up the mainMenu form.
         Button mAddPointsButton = (Button) findViewById(R.id.add_points_button);
         mAddPointsButton.setOnClickListener(new OnClickListener() {
