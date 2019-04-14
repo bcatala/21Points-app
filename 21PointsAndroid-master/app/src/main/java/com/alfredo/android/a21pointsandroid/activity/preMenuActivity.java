@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.alfredo.android.a21pointsandroid.R;
+import com.alfredo.android.a21pointsandroid.model.UserData;
 import com.alfredo.android.a21pointsandroid.restapi.RestAPIManager;
 
 public class preMenuActivity extends AppCompatActivity {
@@ -21,9 +22,9 @@ public class preMenuActivity extends AppCompatActivity {
         mGotoMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // setContentView(R.layout.activity_main);
-                Intent i = new Intent(preMenuActivity.this, MainMenu.class);
-                startActivity(i);
+           // setContentView(R.layout.activity_main);
+            Intent i = new Intent(preMenuActivity.this, MainMenu.class);
+            startActivity(i);
             }
 
         });

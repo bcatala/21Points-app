@@ -40,7 +40,7 @@ public class RestAPIManager {
 
     }
 
-    public synchronized void getUserToken(String username, String password, final LoginAPICallBack restAPICallBack) {
+    public synchronized void getUserToken(final String username, String password, final LoginAPICallBack restAPICallBack) {
         UserData userData = new UserData(username, password);
         Call<UserToken> call = restApiService.requestToken(userData);
 

@@ -33,7 +33,8 @@ public class MainMenu extends AppCompatActivity {
         mAddPointsButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Initiates the activity
+                Intent i = new Intent(MainMenu.this, AddPoints.class);
+                startActivity(i);
             }
         });
     }
