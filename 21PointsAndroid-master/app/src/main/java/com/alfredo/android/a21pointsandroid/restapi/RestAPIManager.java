@@ -44,6 +44,8 @@ public class RestAPIManager {
         UserData userData = new UserData(username, password);
         Call<UserToken> call = restApiService.requestToken(userData);
 
+        
+
         call.enqueue(new Callback<UserToken>() {
             @Override
             public void onResponse(Call<UserToken> call, Response<UserToken> response) {
