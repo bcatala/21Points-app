@@ -35,7 +35,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Add Points"
+                    android:text="Add Weight"
                     android:textSize="30dp"
                     android:layout_marginTop="10dp"/>
             </LinearLayout>
@@ -62,12 +62,37 @@
                     android:text="Weight"
                     android:textSize="20dp"
                     android:layout_marginTop="0dp"/>
-                <EditText
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@android:color/darker_gray"
-                    tools:text="Your weight"/>
-                <TextView
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="250dp"
+                        android:layout_height="40dp"
+                        android:inputType="number"
+                        android:text="@+text/number_variable"
+                        android:id="@+id/editText1"
+                        android:background="@android:color/darker_gray"
+                    />
+                    <Button
+                        android:id="@+id/add_weight_1"
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:background="@android:color/darker_gray"
+                        android:text="More" />
+                    <Button
+                        android:id="@+id/add_weight_2"
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:background="@android:color/darker_gray"
+                        android:text="Less" />
+
+                </LinearLayout>
+                    <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="User"
