@@ -17,12 +17,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.alfredo.android.a21pointsandroid.restapi.RestAPIService;
 import com.alfredo.android.a21pointsandroid.restapi.callback.LoginAPICallBack;
 import com.alfredo.android.a21pointsandroid.model.Points;
 import com.alfredo.android.a21pointsandroid.restapi.callback.PointsAPICallBack;
 import com.alfredo.android.a21pointsandroid.R;
 import com.alfredo.android.a21pointsandroid.restapi.RestAPIManager;
 import com.alfredo.android.a21pointsandroid.model.UserToken;
+import com.alfredo.android.a21pointsandroid.restapi.callback.UserAPICallBack;
 
 import retrofit2.Call;
 
@@ -78,8 +80,6 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
 
-        LoginAPICallBack hola;
-
         boolean cancel = false;
         View focusView = null;
 
@@ -110,8 +110,12 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
             intent.putExtra("email", email);
             intent.putExtra("c", password);
 
+
             startActivity(intent);
 
+
+            //RestAPIManager.getInstance().getUserInfo(user);
+            //RestAPIManager.getInstance().getPointsById(5, this);
            // RestAPIManager.getInstance().getUserToken(email, password, this);
             // setContentView(R.layout.activity_premenu);
 
@@ -173,6 +177,7 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
 
 
         RestAPIManager.getInstance().postPoints(new Points("2019-03-14",1,1,1), this);
+        //RestAPIManager.getInstance().getUserInfo();
 
         Intent i = new Intent(LoginActivity.this, preMenuActivity.class);
         startActivity(i);

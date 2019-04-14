@@ -1,5 +1,6 @@
 package com.alfredo.android.a21pointsandroid.restapi;
 
+import com.alfredo.android.a21pointsandroid.model.User;
 import com.alfredo.android.a21pointsandroid.model.Points;
 import com.alfredo.android.a21pointsandroid.model.UserData;
 import com.alfredo.android.a21pointsandroid.model.UserToken;
@@ -21,4 +22,6 @@ public interface RestAPIService {
     Call<UserToken> requestToken(@Body UserData userData);
     @POST("/api/register")
     Call<Void> register(@Body UserData userData);
+    @GET("/api/account")
+    Call<User> getUserInfo(@Header("Authorization") String token);
 }
