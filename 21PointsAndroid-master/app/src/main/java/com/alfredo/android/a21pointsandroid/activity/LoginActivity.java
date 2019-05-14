@@ -39,6 +39,9 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
     private View mLoginFormView;
     private Button GotoMenu;
     private Points points;
+    private String email;
+    private String password;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,7 +117,8 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
 
 
             //startActivity(intent);
-
+this.email=email;
+this.password=password;
 
             //RestAPIManager.getInstance().getUserInfo(user);
             //RestAPIManager.getInstance().getPointsById(5, this);
@@ -184,6 +188,9 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
         //RestAPIManager.getInstance().getUserInfo();
 
         Intent i = new Intent(LoginActivity.this, preMenuActivity.class);
+
+        i.putExtra("email", this.email);
+        i.putExtra("c", this.password);
         startActivity(i);
     }
 
