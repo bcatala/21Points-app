@@ -19,8 +19,24 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.AddPoints"
+            android:label="AddPoints">
+        </activity>
+        <activity
+            android:name=".activity.AddWeight"
+            android:label="AddWeight">
+        </activity>
+        <activity
             android:name=".activity.LoginActivity"
             android:label="@string/app_name">
+        </activity>
+        <activity
+            android:name=".activity.preMenuActivity"
+            android:label="premenu">
+        </activity>
+        <activity
+            android:name=".activity.MainMenu"
+            android:label="MainMenu">
         </activity>
         <activity
             android:name=".activity.RegisterActivity"

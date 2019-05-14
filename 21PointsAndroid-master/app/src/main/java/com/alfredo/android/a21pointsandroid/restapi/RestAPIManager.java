@@ -1,11 +1,16 @@
 package com.alfredo.android.a21pointsandroid.restapi;
 
+import android.widget.TextView;
+
+import com.alfredo.android.a21pointsandroid.R;
 import com.alfredo.android.a21pointsandroid.model.Points;
+import com.alfredo.android.a21pointsandroid.model.User;
 import com.alfredo.android.a21pointsandroid.restapi.callback.RegisterAPICallback;
 import com.alfredo.android.a21pointsandroid.model.UserData;
 import com.alfredo.android.a21pointsandroid.model.UserToken;
 import com.alfredo.android.a21pointsandroid.restapi.callback.LoginAPICallBack;
 import com.alfredo.android.a21pointsandroid.restapi.callback.PointsAPICallBack;
+import com.alfredo.android.a21pointsandroid.restapi.callback.UserAPICallBack;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -40,9 +45,10 @@ public class RestAPIManager {
 
     }
 
-    public synchronized void getUserToken(String username, String password, final LoginAPICallBack restAPICallBack) {
+    public synchronized void getUserToken(final String username, String password, final LoginAPICallBack restAPICallBack) {
         UserData userData = new UserData(username, password);
         Call<UserToken> call = restApiService.requestToken(userData);
+
 
         call.enqueue(new Callback<UserToken>() {
             @Override
@@ -84,6 +90,27 @@ public class RestAPIManager {
             }
         });
     }
+
+    public  synchronized void getUserInfo(final UserAPICallBack userAPICallBack){
+        Call<User> call = restApiService.getUserInfo("Bearer " + userToken.getIdToken());
+
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful()) {
+                    userAPICallBack.onGetUserInfo(response.body());
+                } else {
+                    userAPICallBack.onFailure(new Throwable("ERROR " + response.code() + ", " + response.raw().message()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                userAPICallBack.onFailure(t);
+            }
+        });
+    }
+
 
     public synchronized void getPointsById( Integer id , final PointsAPICallBack pointsAPICallBack) {
         Call<Points> call = restApiService.getPointsById(id, "Bearer " + userToken.getIdToken());

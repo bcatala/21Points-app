@@ -17,12 +17,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.alfredo.android.a21pointsandroid.restapi.RestAPIService;
 import com.alfredo.android.a21pointsandroid.restapi.callback.LoginAPICallBack;
 import com.alfredo.android.a21pointsandroid.model.Points;
 import com.alfredo.android.a21pointsandroid.restapi.callback.PointsAPICallBack;
 import com.alfredo.android.a21pointsandroid.R;
 import com.alfredo.android.a21pointsandroid.restapi.RestAPIManager;
 import com.alfredo.android.a21pointsandroid.model.UserToken;
+import com.alfredo.android.a21pointsandroid.restapi.callback.UserAPICallBack;
+
+import retrofit2.Call;
 
 /**
  * A login screen that offers login via email/password.
@@ -34,6 +38,8 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
     private EditText mPasswordView;
     private View mLoginFormView;
     private Button GotoMenu;
+    private Points points;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +68,6 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
 
         mLoginFormView = findViewById(R.id.login_form);
     }
-
     /**
      * Attempts to sign in or register the account specified by the login form.
      * If there are form errors (invalid email, missing fields, etc.), the
@@ -103,11 +108,18 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
             // form field with an error.
             focusView.requestFocus();
         } else {
-            setContentView(R.layout.activity_premenu);
-            //RestAPIManager.getInstance().getUserToken(email, password, this);
-            Intent i = new Intent(LoginActivity.this, preMenuActivity.class);
-           // startActivity(i);
+            //Intent intent = new Intent(LoginActivity.this, preMenuActivity.class);
+            //intent.putExtra("email", email);
+            //intent.putExtra("c", password);
 
+
+            //startActivity(intent);
+
+
+            //RestAPIManager.getInstance().getUserInfo(user);
+            //RestAPIManager.getInstance().getPointsById(5, this);
+           RestAPIManager.getInstance().getUserToken(email, password, this);
+            // setContentView(R.layout.activity_premenu);
 
         }
     }
@@ -127,6 +139,8 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
 
         Log.d("21Points", "onGetPoints OK " + points.getId());
 
+        this.points = points;
+
         new AlertDialog.Builder(this)
                 .setTitle("Points")
                 .setMessage(points.toString())
@@ -144,6 +158,7 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
 
     @Override
     public void onLoginSuccess(UserToken userToken) {
+
 
         Log.d("21Points", "onLoginSuccess OK " + userToken.getIdToken());
 
@@ -166,7 +181,10 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
 
 
         RestAPIManager.getInstance().postPoints(new Points("2019-03-14",1,1,1), this);
+        //RestAPIManager.getInstance().getUserInfo();
 
+        Intent i = new Intent(LoginActivity.this, preMenuActivity.class);
+        startActivity(i);
     }
 
     @Override

@@ -16,4 +16,6 @@
         completions."
     </string>
     <string name="title_activity_register">Register</string>
+    <string name="username">User_name</string>
+    <string name="textView4">username</string>
 </resources>
