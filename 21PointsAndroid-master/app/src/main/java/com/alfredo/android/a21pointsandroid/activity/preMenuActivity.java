@@ -26,6 +26,8 @@ public class preMenuActivity extends AppCompatActivity {
 
         String a = getIntent().getStringExtra("email");
         String b = getIntent().getStringExtra("c");
+        final String a2 = getIntent().getStringExtra("Systolic");
+        final String a3 = getIntent().getStringExtra("Diastolic");
 
          TextView textView4= findViewById(R.id.textView4);
          textView4.setText(a);
@@ -37,6 +39,8 @@ public class preMenuActivity extends AppCompatActivity {
             public void onClick(View v) {
             Intent i = new Intent(preMenuActivity.this, MainMenu.class);
             i.putExtra("username",getIntent().getStringExtra("email"));
+            i.putExtra("Diastolic", a3);
+            i.putExtra("Systolic", a2);
             startActivity(i);
             }
 

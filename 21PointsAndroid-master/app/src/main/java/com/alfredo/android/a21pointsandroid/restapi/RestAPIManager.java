@@ -3,8 +3,10 @@ package com.alfredo.android.a21pointsandroid.restapi;
 import android.widget.TextView;
 
 import com.alfredo.android.a21pointsandroid.R;
+import com.alfredo.android.a21pointsandroid.model.Blood;
 import com.alfredo.android.a21pointsandroid.model.Points;
 import com.alfredo.android.a21pointsandroid.model.User;
+import com.alfredo.android.a21pointsandroid.restapi.callback.BloodApiCallBack;
 import com.alfredo.android.a21pointsandroid.restapi.callback.RegisterAPICallback;
 import com.alfredo.android.a21pointsandroid.model.UserData;
 import com.alfredo.android.a21pointsandroid.model.UserToken;
@@ -154,5 +156,27 @@ public class RestAPIManager {
             }
         });
     }
+
+    public synchronized void getBlood(Integer id , final BloodApiCallBack bloodAPICallBack) {
+        Call<Blood> call = restApiService.getBlood(id, "Bearer " + userToken.getIdToken());
+
+        call.enqueue(new Callback<Blood>() {
+            @Override
+            public void onResponse(Call<Blood> call, Response<Blood> response) {
+
+                if (response.isSuccessful()) {
+                    bloodAPICallBack.onGetBlood(response.body());
+                } else {
+                    bloodAPICallBack.onFailure(new Throwable("ERROR " + response.code() + ", " + response.raw().message()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Blood> call, Throwable t) {
+                bloodAPICallBack.onFailure(t);
+            }
+        });
+    }
+
 
 }

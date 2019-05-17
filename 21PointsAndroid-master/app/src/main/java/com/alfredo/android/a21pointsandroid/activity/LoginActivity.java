@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.alfredo.android.a21pointsandroid.model.Blood;
 import com.alfredo.android.a21pointsandroid.restapi.RestAPIService;
 import com.alfredo.android.a21pointsandroid.restapi.callback.LoginAPICallBack;
 import com.alfredo.android.a21pointsandroid.model.Points;
@@ -25,13 +26,14 @@ import com.alfredo.android.a21pointsandroid.R;
 import com.alfredo.android.a21pointsandroid.restapi.RestAPIManager;
 import com.alfredo.android.a21pointsandroid.model.UserToken;
 import com.alfredo.android.a21pointsandroid.restapi.callback.UserAPICallBack;
+import com.alfredo.android.a21pointsandroid.restapi.callback.BloodApiCallBack;
 
 import retrofit2.Call;
 
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity implements LoginAPICallBack, PointsAPICallBack {
+public class LoginActivity extends AppCompatActivity implements LoginAPICallBack, PointsAPICallBack,BloodApiCallBack {
 
     // UI references.
     private AutoCompleteTextView mEmailView;
@@ -41,6 +43,10 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
     private Points points;
     private String email;
     private String password;
+    private Blood blood;
+    private String Diastolic;
+    private String Systolic;
+    private Integer id;
 
 
     @Override
@@ -117,15 +123,41 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
 
 
             //startActivity(intent);
-this.email=email;
-this.password=password;
+            this.email=email;
+            this.password=password;
+
 
             //RestAPIManager.getInstance().getUserInfo(user);
             //RestAPIManager.getInstance().getPointsById(5, this);
            RestAPIManager.getInstance().getUserToken(email, password, this);
+
             // setContentView(R.layout.activity_premenu);
 
         }
+    }
+
+    @Override
+    public void onGetBlood(Blood blood) {
+
+        Log.d("21Points", "onGetBloos OK " + blood.getId());
+
+        this.blood = blood;
+        this.id=blood.getId();
+        this.Diastolic=blood.getDiastolic().toString();
+        this.Systolic=blood.getSystolic().toString();
+
+        Intent i = new Intent(LoginActivity.this, preMenuActivity.class);
+
+        i.putExtra("email", this.email);
+        i.putExtra("c", this.password);
+        i.putExtra("Diastolic", this.Diastolic);
+        i.putExtra("Systolic", this.Systolic);
+        startActivity(i);
+
+        new AlertDialog.Builder(this)
+                .setTitle("Blood")
+                .setMessage(blood.toString())
+                .show();
     }
 
     private boolean isEmailValid(String email) {
@@ -149,6 +181,14 @@ this.password=password;
                 .setTitle("Points")
                 .setMessage(points.toString())
                 .show();
+    }
+    @Override
+    public void onPostBlood(Blood blood) {
+
+        //Log.d("21Points", "onPostPoints OK " + points.getId());
+
+       // RestAPIManager.getInstance().getPointsById(points.getId(), this);
+
     }
 
     @Override
@@ -185,13 +225,10 @@ this.password=password;
 
 
         RestAPIManager.getInstance().postPoints(new Points("2019-03-14",1,1,1), this);
-        //RestAPIManager.getInstance().getUserInfo();
+        RestAPIManager.getInstance().getBlood(4677,this);
 
-        Intent i = new Intent(LoginActivity.this, preMenuActivity.class);
 
-        i.putExtra("email", this.email);
-        i.putExtra("c", this.password);
-        startActivity(i);
+
     }
 
     @Override
