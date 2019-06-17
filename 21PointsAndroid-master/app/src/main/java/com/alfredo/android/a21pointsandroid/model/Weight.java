@@ -29,7 +29,7 @@ public class Weight {
         return weight;
     }
 
-    public void setWeight(Integer systolic) {
+    public void setWeight(Integer weight) {
         this.weight = weight;
     }
 

@@ -28,6 +28,7 @@ public class preMenuActivity extends AppCompatActivity {
         String b = getIntent().getStringExtra("c");
         final String a2 = getIntent().getStringExtra("Systolic");
         final String a3 = getIntent().getStringExtra("Diastolic");
+        final String a4 = getIntent().getStringExtra("Weight");
 
          TextView textView4= findViewById(R.id.textView4);
          textView4.setText(a);

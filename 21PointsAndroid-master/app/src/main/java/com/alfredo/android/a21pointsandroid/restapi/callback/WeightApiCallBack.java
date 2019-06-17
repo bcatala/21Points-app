@@ -3,7 +3,7 @@ package com.alfredo.android.a21pointsandroid.restapi.callback;
 import com.alfredo.android.a21pointsandroid.model.Weight;
 import com.alfredo.android.a21pointsandroid.model.User;
 
-public interface WeightApiCallBack {
+public interface WeightApiCallBack extends RestAPICallBack {
 
     void onPostWeight(Weight weight);
     void onGetWeight(Weight weight);

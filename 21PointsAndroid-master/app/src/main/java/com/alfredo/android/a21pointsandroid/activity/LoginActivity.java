@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.alfredo.android.a21pointsandroid.model.Blood;
+import com.alfredo.android.a21pointsandroid.model.Weight;
 import com.alfredo.android.a21pointsandroid.restapi.RestAPIService;
 import com.alfredo.android.a21pointsandroid.restapi.callback.LoginAPICallBack;
 import com.alfredo.android.a21pointsandroid.model.Points;
@@ -44,6 +45,8 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
     private String email;
     private String password;
     private Blood blood;
+    private Weight weight;
+    private String Weight;
     private String Diastolic;
     private String Systolic;
     private Integer id;
@@ -157,6 +160,28 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
         new AlertDialog.Builder(this)
                 .setTitle("Blood")
                 .setMessage(blood.toString())
+                .show();
+    }
+
+    @Override
+    public void onGetWeight(Weight weight) {
+
+        Log.d("21Points", "onGetWeight OK " + weight.getId());
+
+        this.weight = weight;
+        this.id=weight.getId();
+        this.Weight=weight.getWeight().toString();
+
+        Intent i = new Intent(LoginActivity.this, preMenuActivity.class);
+
+        i.putExtra("email", this.email);
+        i.putExtra("c", this.password);
+        i.putExtra("Weight", this.Weight);
+        startActivity(i);
+
+        new AlertDialog.Builder(this)
+                .setTitle("Weight")
+                .setMessage(weight.toString())
                 .show();
     }
 

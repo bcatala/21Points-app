@@ -30,10 +30,14 @@ public class MainMenu extends AppCompatActivity {
 
          String a2 = getIntent().getStringExtra("Systolic");
          String a3 = getIntent().getStringExtra("Diastolic");
+         String a4 = getIntent().getStringExtra("Weight");
 
 
         TextView textView2= findViewById(R.id.blood_pressure);
         textView2.setText("Blood Pressure: "  + "Systolic: " +a2+ "  Diastolic:"+ a3);
+
+        TextView textView3= findViewById(R.id.weight);
+        textView3.setText("Weight: "  + "Weight: " + a4);
 
         TextView textView4= findViewById(R.id.logged_name);
         textView4.setText("You are logged in as " + getIntent().getStringExtra("username"));

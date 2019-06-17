@@ -6,6 +6,7 @@ import com.alfredo.android.a21pointsandroid.R;
 import com.alfredo.android.a21pointsandroid.model.Blood;
 import com.alfredo.android.a21pointsandroid.model.Points;
 import com.alfredo.android.a21pointsandroid.model.User;
+import com.alfredo.android.a21pointsandroid.model.Weight;
 import com.alfredo.android.a21pointsandroid.restapi.callback.BloodApiCallBack;
 import com.alfredo.android.a21pointsandroid.restapi.callback.RegisterAPICallback;
 import com.alfredo.android.a21pointsandroid.model.UserData;
@@ -13,6 +14,7 @@ import com.alfredo.android.a21pointsandroid.model.UserToken;
 import com.alfredo.android.a21pointsandroid.restapi.callback.LoginAPICallBack;
 import com.alfredo.android.a21pointsandroid.restapi.callback.PointsAPICallBack;
 import com.alfredo.android.a21pointsandroid.restapi.callback.UserAPICallBack;
+import com.alfredo.android.a21pointsandroid.restapi.callback.WeightApiCallBack;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -178,5 +180,22 @@ public class RestAPIManager {
         });
     }
 
+    public synchronized void getWeight(Integer id , final WeightApiCallBack weightAPICallBack) {
+        Call<Weight> call = restApiService.getWeight(id, "Bearer " + userToken.getIdToken());
 
+        call.enqueue(new Callback<Weight>() {
+            @Override
+            public void onResponse(Call<Weight> call, Response<Weight> response) {
+
+                if (response.isSuccessful()) {
+                    weightAPICallBack.onGetWeight(response.body());
+                } else {
+                    weightAPICallBack.onFailure(new Throwable("ERROR " + response.code() + ", " + response.raw().message()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Weight> call, Throwable t) { weightAPICallBack.onFailure(t); }
+        });
+    }
 }
