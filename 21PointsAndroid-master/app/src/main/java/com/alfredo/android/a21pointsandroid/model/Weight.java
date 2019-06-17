@@ -5,9 +5,7 @@ public class Weight {
 
     private String timestamp;
 
-    private Integer systolic;
-
-    private Integer diastolic;
+    private Integer weight;
 
     private Object user;
 
@@ -27,20 +25,12 @@ public class Weight {
         this.timestamp = timestamp;
     }
 
-    public Integer getSystolic() {
-        return systolic;
+    public Integer getWeight() {
+        return weight;
     }
 
-    public void setSystolic(Integer systolic) {
-        this.systolic = systolic;
-    }
-
-    public Integer getDiastolic() {
-        return diastolic;
-    }
-
-    public void setDiastolic(Integer diastolic) {
-        this.diastolic = diastolic;
+    public void setWeight(Integer systolic) {
+        this.weight = weight;
     }
 
     public Object getUser() {

@@ -5,6 +5,7 @@ import com.alfredo.android.a21pointsandroid.model.User;
 import com.alfredo.android.a21pointsandroid.model.Points;
 import com.alfredo.android.a21pointsandroid.model.UserData;
 import com.alfredo.android.a21pointsandroid.model.UserToken;
+import com.alfredo.android.a21pointsandroid.model.Weight;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -27,5 +28,7 @@ public interface RestAPIService {
     Call<User> getUserInfo(@Header("Authorization") String token);
     @GET("/api/blood-pressures/{id}")
     Call<Blood> getBlood(@Path("id") Integer id, @Header("Authorization") String token);
+    @GET("/api/weight/{id}")
+    Call<Weight> getWeight(@Path("id") Integer id, @Header("Authorization") String token);
 
 }
