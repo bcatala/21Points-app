@@ -1,6 +1,5 @@
 package com.alfredo.android.a21pointsandroid.restapi.callback;
 
-
 import com.alfredo.android.a21pointsandroid.model.Blood;
 import com.alfredo.android.a21pointsandroid.model.User;
 

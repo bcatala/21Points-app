@@ -27,4 +27,5 @@ public interface RestAPIService {
     Call<User> getUserInfo(@Header("Authorization") String token);
     @GET("/api/blood-pressures/{id}")
     Call<Blood> getBlood(@Path("id") Integer id, @Header("Authorization") String token);
+
 }
