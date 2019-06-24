@@ -28,10 +28,14 @@ public class MainMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainmenu);
 
-         String a2 = getIntent().getStringExtra("Systolic");
-         String a3 = getIntent().getStringExtra("Diastolic");
-         String a4 = getIntent().getStringExtra("Weight");
 
+        String a2 = getIntent().getStringExtra("Systolic");
+        String a3 = getIntent().getStringExtra("Diastolic");
+        String a4 = getIntent().getStringExtra("Weight");
+        String a1 = getIntent().getStringExtra("Points");
+
+        TextView textView1 = findViewById(R.id.points);
+        textView1.setText("Points: " + a1);
 
         TextView textView2= findViewById(R.id.blood_pressure);
         textView2.setText("Blood Pressure: "  + "Systolic: " +a2+ "  Diastolic:"+ a3);

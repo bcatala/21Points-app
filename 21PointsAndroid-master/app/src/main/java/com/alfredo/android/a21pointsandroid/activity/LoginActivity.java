@@ -50,6 +50,7 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
     private String Diastolic;
     private String Systolic;
     private Integer id;
+    private String points_str;
 
 
     @Override
@@ -149,13 +150,15 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
         this.Diastolic=blood.getDiastolic().toString();
         this.Systolic=blood.getSystolic().toString();
 
-        Intent i = new Intent(LoginActivity.this, preMenuActivity.class);
-
-        i.putExtra("email", this.email);
-        i.putExtra("c", this.password);
-        i.putExtra("Diastolic", this.Diastolic);
-        i.putExtra("Systolic", this.Systolic);
-        startActivity(i);
+        //Intent i = new Intent(LoginActivity.this, preMenuActivity.class);
+//
+        //i.putExtra("email", this.email);
+        //i.putExtra("c", this.password);
+        //i.putExtra("Diastolic", this.Diastolic);
+        //i.putExtra("Systolic", this.Systolic);
+        //i.putExtra("Points", pointsToInt(this.points));
+//
+        //startActivity(i);
 
         new AlertDialog.Builder(this)
                 .setTitle("Blood")
@@ -172,12 +175,13 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
         this.id=weight.getId();
         this.Weight=weight.getWeight().toString();
 
-        Intent i = new Intent(LoginActivity.this, preMenuActivity.class);
+        //Intent i = new Intent(LoginActivity.this, preMenuActivity.class);
 
-        i.putExtra("email", this.email);
-        i.putExtra("c", this.password);
-        i.putExtra("Weight", this.Weight);
-        startActivity(i);
+        //i.putExtra("email", this.email);
+        //i.putExtra("c", this.password);
+        //i.putExtra("Weight", this.Weight);
+        //
+        //startActivity(i);
 
         new AlertDialog.Builder(this)
                 .setTitle("Weight")
@@ -201,12 +205,32 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
         Log.d("21Points", "onGetPoints OK " + points.getId());
 
         this.points = points;
+        this.points_str = Integer.toString(pointsToInt(points));
+
+        Intent i = new Intent(LoginActivity.this, preMenuActivity.class);
+        i.putExtra("email", this.email);
+        i.putExtra("c", this.password);
+        i.putExtra("Diastolic", this.Diastolic);
+        i.putExtra("Systolic", this.Systolic);
+        i.putExtra("Points", this.points_str);             //pointsToInt(this.points)
+        startActivity(i);
 
         new AlertDialog.Builder(this)
                 .setTitle("Points")
                 .setMessage(points.toString())
                 .show();
     }
+
+    private int pointsToInt(Points points){
+        int int_points = 0;
+
+        int_points += points.getAlcohol();
+        int_points += points.getExercise();
+        int_points += points.getMeals();
+
+        return int_points;
+    }
+
     @Override
     public void onPostBlood(Blood blood) {
 
@@ -228,8 +252,8 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
     @Override
     public void onLoginSuccess(UserToken userToken) {
 
-
         Log.d("21Points", "onLoginSuccess OK " + userToken.getIdToken());
+
 
         new AlertDialog.Builder(this)
                 .setTitle("Token")

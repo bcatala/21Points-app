@@ -26,6 +26,7 @@ public class preMenuActivity extends AppCompatActivity {
 
         String a = getIntent().getStringExtra("email");
         String b = getIntent().getStringExtra("c");
+        final String a1 = getIntent().getStringExtra("Points");
         final String a2 = getIntent().getStringExtra("Systolic");
         final String a3 = getIntent().getStringExtra("Diastolic");
         final String a4 = getIntent().getStringExtra("Weight");
@@ -42,6 +43,7 @@ public class preMenuActivity extends AppCompatActivity {
             i.putExtra("username",getIntent().getStringExtra("email"));
             i.putExtra("Diastolic", a3);
             i.putExtra("Systolic", a2);
+            i.putExtra("Points",a1);
             startActivity(i);
             }
 
