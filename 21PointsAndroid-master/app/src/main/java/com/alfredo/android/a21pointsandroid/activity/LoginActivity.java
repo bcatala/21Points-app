@@ -163,7 +163,7 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
                 .show();
     }
 
-    @Override
+    //@Override
     public void onGetWeight(Weight weight) {
 
         Log.d("21Points", "onGetWeight OK " + weight.getId());
