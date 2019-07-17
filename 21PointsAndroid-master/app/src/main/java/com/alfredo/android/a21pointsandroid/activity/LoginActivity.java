@@ -28,13 +28,14 @@ import com.alfredo.android.a21pointsandroid.restapi.RestAPIManager;
 import com.alfredo.android.a21pointsandroid.model.UserToken;
 import com.alfredo.android.a21pointsandroid.restapi.callback.UserAPICallBack;
 import com.alfredo.android.a21pointsandroid.restapi.callback.BloodApiCallBack;
+import com.alfredo.android.a21pointsandroid.restapi.callback.WeightApiCallBack;
 
 import retrofit2.Call;
 
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity implements LoginAPICallBack, PointsAPICallBack,BloodApiCallBack {
+public class LoginActivity extends AppCompatActivity implements LoginAPICallBack, PointsAPICallBack,BloodApiCallBack,WeightApiCallBack {
 
     // UI references.
     private AutoCompleteTextView mEmailView;
@@ -51,7 +52,6 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
     private String Systolic;
     private Integer id;
     private String points_str;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -166,7 +166,7 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
                 .show();
     }
 
-    //@Override
+    @Override
     public void onGetWeight(Weight weight) {
 
         Log.d("21Points", "onGetWeight OK " + weight.getId());
@@ -175,13 +175,14 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
         this.id=weight.getId();
         this.Weight=weight.getWeight().toString();
 
-        //Intent i = new Intent(LoginActivity.this, preMenuActivity.class);
-
-        //i.putExtra("email", this.email);
-        //i.putExtra("c", this.password);
-        //i.putExtra("Weight", this.Weight);
-        //
-        //startActivity(i);
+        /*Intent i = new Intent(LoginActivity.this, preMenuActivity.class);
+        i.putExtra("email", this.email);
+        i.putExtra("c", this.password);
+        i.putExtra("Diastolic", this.Diastolic);
+        i.putExtra("Systolic", this.Systolic);
+        i.putExtra("Points", this.points_str);             //pointsToInt(this.points)
+        i.putExtra("Weight", this.Weight);
+        startActivity(i);*/
 
         new AlertDialog.Builder(this)
                 .setTitle("Weight")
@@ -213,6 +214,7 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
         i.putExtra("Diastolic", this.Diastolic);
         i.putExtra("Systolic", this.Systolic);
         i.putExtra("Points", this.points_str);             //pointsToInt(this.points)
+        i.putExtra("Weight", this.Weight);
         startActivity(i);
 
         new AlertDialog.Builder(this)

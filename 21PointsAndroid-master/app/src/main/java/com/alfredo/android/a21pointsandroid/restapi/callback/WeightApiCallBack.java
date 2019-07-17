@@ -5,7 +5,7 @@ import com.alfredo.android.a21pointsandroid.model.User;
 
 public interface WeightApiCallBack extends RestAPICallBack {
 
-    void onPostWeight(Weight weight);
+    //void onPostWeight(Weight weight);
     void onGetWeight(Weight weight);
 
 }

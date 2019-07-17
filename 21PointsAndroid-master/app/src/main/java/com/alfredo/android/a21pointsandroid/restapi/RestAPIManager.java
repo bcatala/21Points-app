@@ -179,8 +179,7 @@ public class RestAPIManager {
             }
         });
     }
-
-    public synchronized void getWeight(Integer id , final WeightApiCallBack weightAPICallBack) {
+    public synchronized void getWeight( Integer id , final WeightApiCallBack weightAPICallBack) {
         Call<Weight> call = restApiService.getWeight(id, "Bearer " + userToken.getIdToken());
 
         call.enqueue(new Callback<Weight>() {
@@ -195,7 +194,9 @@ public class RestAPIManager {
             }
 
             @Override
-            public void onFailure(Call<Weight> call, Throwable t) { weightAPICallBack.onFailure(t); }
+            public void onFailure(Call<Weight> call, Throwable t) {
+                weightAPICallBack.onFailure(t);
+            }
         });
     }
 }

@@ -44,6 +44,7 @@ public class preMenuActivity extends AppCompatActivity {
             i.putExtra("Diastolic", a3);
             i.putExtra("Systolic", a2);
             i.putExtra("Points",a1);
+            i.putExtra("Weight",a4);
             startActivity(i);
             }
 
