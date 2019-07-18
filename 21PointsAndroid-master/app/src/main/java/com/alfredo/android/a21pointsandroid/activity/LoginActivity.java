@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.alfredo.android.a21pointsandroid.model.User;
 import com.alfredo.android.a21pointsandroid.restapi.RestAPIService;
 import com.alfredo.android.a21pointsandroid.restapi.callback.LoginAPICallBack;
 import com.alfredo.android.a21pointsandroid.model.Points;
@@ -31,7 +32,7 @@ import retrofit2.Call;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity implements LoginAPICallBack, PointsAPICallBack {
+public class LoginActivity extends AppCompatActivity implements LoginAPICallBack, PointsAPICallBack, UserAPICallBack {
 
     // UI references.
     private AutoCompleteTextView mEmailView;
@@ -41,6 +42,8 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
     private Points points;
     private String email;
     private String password;
+    private User user;
+    private String token;
 
 
     @Override
@@ -117,13 +120,14 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
 
 
             //startActivity(intent);
-this.email=email;
-this.password=password;
+            this.email=email;
+            this.password=password;
 
             //RestAPIManager.getInstance().getUserInfo(user);
             //RestAPIManager.getInstance().getPointsById(5, this);
-           RestAPIManager.getInstance().getUserToken(email, password, this);
+            RestAPIManager.getInstance().getUserToken(email, password, this);
             // setContentView(R.layout.activity_premenu);
+            //RestAPIManager.getInstance().getUserAccount(this, token);
 
         }
     }
@@ -187,6 +191,9 @@ this.password=password;
         RestAPIManager.getInstance().postPoints(new Points("2019-03-14",1,1,1), this);
         //RestAPIManager.getInstance().getUserInfo();
 
+        this.token = userToken.getIdToken();
+        RestAPIManager.getInstance().getUserAccount(this, token);
+
         Intent i = new Intent(LoginActivity.this, preMenuActivity.class);
 
         i.putExtra("email", this.email);
@@ -216,6 +223,17 @@ this.password=password;
                 .setNegativeButton(android.R.string.no, null)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
+    }
+
+    @Override
+    public void onGetUser(User body){
+        this.user = body;
+        System.out.println("HOLA");
+    }
+
+    @Override
+    public void onGetUserInfo(User body){
+
     }
 }
 

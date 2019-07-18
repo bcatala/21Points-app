@@ -24,4 +24,6 @@ public interface RestAPIService {
     Call<Void> register(@Body UserData userData);
     @GET("/api/account")
     Call<User> getUserInfo(@Header("Authorization") String token);
+    @GET("/api/account")
+    Call<User> getUserAccount(@Header("Authorization") String token);
 }

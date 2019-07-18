@@ -26,6 +26,7 @@ public class RestAPIManager {
     private Retrofit retrofit;
     private RestAPIService restApiService;
     private UserToken userToken;
+    private String hola;
 
 
     public static RestAPIManager getInstance() {
@@ -49,7 +50,6 @@ public class RestAPIManager {
         UserData userData = new UserData(username, password);
         Call<UserToken> call = restApiService.requestToken(userData);
 
-
         call.enqueue(new Callback<UserToken>() {
             @Override
             public void onResponse(Call<UserToken> call, Response<UserToken> response) {
@@ -67,6 +67,7 @@ public class RestAPIManager {
                 restAPICallBack.onFailure(t);
             }
         });
+
     }
 
     public synchronized void postPoints(Points points, final PointsAPICallBack pointsAPICallBack) {
@@ -155,4 +156,24 @@ public class RestAPIManager {
         });
     }
 
+    public synchronized void getUserAccount(final UserAPICallBack userAPICallBack, String token) {
+        User user = new User();
+        Call<User> call = restApiService.getUserAccount("Bearer " + token);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+
+                if (response.isSuccessful()) {
+                    userAPICallBack.onGetUser(response.body());
+                } else {
+                    userAPICallBack.onFailure(new Throwable("ERROR " + response.code() + ", " + response.raw().message()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                userAPICallBack.onFailure(t);
+            }
+        });
+    }
 }
