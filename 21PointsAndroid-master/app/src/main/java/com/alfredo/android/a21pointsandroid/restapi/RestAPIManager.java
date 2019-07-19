@@ -113,12 +113,13 @@ public class RestAPIManager {
     }
 
 
-    public synchronized void getPointsById( Integer id , final PointsAPICallBack pointsAPICallBack) {
-        Call<Points> call = restApiService.getPointsById(id, "Bearer " + userToken.getIdToken());
+    public synchronized void getPointsById(  final PointsAPICallBack pointsAPICallBack, Integer id) {
+        Call<Points> call = restApiService.getPointsById(id,"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImV4cCI6MTU2MzYxNzk1NH0.SWO2plvUJUYAQN9P_YNjR1DXrEkPWD5aVBXkkX_Cg4b56UbnZGWm1v8QrpaqrIrcHLMCtYwInzhQqp8FSySNZA");
 
         call.enqueue(new Callback<Points>() {
             @Override
             public void onResponse(Call<Points> call, Response<Points> response) {
+                int a = 1;
 
                 if (response.isSuccessful()) {
                     pointsAPICallBack.onGetPoints(response.body());
@@ -133,6 +134,8 @@ public class RestAPIManager {
             }
         });
     }
+
+
 
     public synchronized void register(String username, String email, String password, final RegisterAPICallback registerAPICallback) {
         UserData userData = new UserData(username, email, password);
@@ -165,6 +168,7 @@ public class RestAPIManager {
 
                 if (response.isSuccessful()) {
                     userAPICallBack.onGetUser(response.body());
+
                 } else {
                     userAPICallBack.onFailure(new Throwable("ERROR " + response.code() + ", " + response.raw().message()));
                 }
@@ -176,4 +180,25 @@ public class RestAPIManager {
             }
         });
     }
+
+ /*   public synchronized void getPoints(final PointsAPICallBack pointsAPICallBack, String token) {
+        Call<Points> call = restApiService.getPoints("Bearer " + userToken.getIdToken());
+
+        call.enqueue(new Callback<Points>() {
+            @Override
+            public void onResponse(Call<Points> call, Response<Points> response) {
+
+                if (response.isSuccessful()) {
+                    pointsAPICallBack.onGetPoints(response.body());
+                } else {
+                    pointsAPICallBack.onFailure(new Throwable("ERROR " + response.code() + ", " + response.raw().message()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Points> call, Throwable t) {
+                pointsAPICallBack.onFailure(t);
+            }
+        });
+    }*/
 }

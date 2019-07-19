@@ -160,7 +160,7 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
 
         Log.d("21Points", "onPostPoints OK " + points.getId());
 
-        RestAPIManager.getInstance().getPointsById(points.getId(), this);
+        //RestAPIManager.getInstance().getPointsById(this, points.getId());
 
     }
 
@@ -188,17 +188,13 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
                 .show();
 
 
-        RestAPIManager.getInstance().postPoints(new Points("2019-03-14",1,1,1), this);
+        //RestAPIManager.getInstance().postPoints(new Points("2019-03-14",1,1,1), this);
         //RestAPIManager.getInstance().getUserInfo();
 
         this.token = userToken.getIdToken();
         RestAPIManager.getInstance().getUserAccount(this, token);
 
-        Intent i = new Intent(LoginActivity.this, preMenuActivity.class);
 
-        i.putExtra("email", this.email);
-        i.putExtra("c", this.password);
-        startActivity(i);
     }
 
     @Override
@@ -229,6 +225,16 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
     public void onGetUser(User body){
         this.user = body;
         System.out.println("HOLA");
+
+        RestAPIManager.getInstance().getPointsById(this, user.getId());
+
+        Intent i = new Intent(LoginActivity.this, preMenuActivity.class);
+
+        i.putExtra("email", this.email);
+        i.putExtra("c", this.password);
+        i.putExtra("user", this.user.convertString());
+
+        startActivity(i);
     }
 
     @Override

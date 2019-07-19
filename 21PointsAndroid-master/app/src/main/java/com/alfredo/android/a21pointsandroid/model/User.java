@@ -34,6 +34,21 @@ public class User {
     @Expose
     private Object resetDate;
 
+    public User(Integer id, String login, String firstName, String lastName, String email, Boolean activated, String langKey, String imageUrl) {
+        this.id = id;
+        this.login = login;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.activated = activated;
+        this.langKey = langKey;
+        this.imageUrl = imageUrl;
+    }
+
+    public User() {
+
+    }
+
     public Integer getId() {
         return id;
     }
@@ -112,5 +127,10 @@ public class User {
                 "id=" + id +
                 ", login='" + login + '\'' +
                 '}';
+    }
+
+    public String convertString() {
+        return this.id.toString() + "/" + this.login + "/" + this.firstName + "/" + this.lastName + "/" +
+                this.email + "/" + this.activated.toString() + "/" + this.langKey + "/" + this.imageUrl;
     }
 }

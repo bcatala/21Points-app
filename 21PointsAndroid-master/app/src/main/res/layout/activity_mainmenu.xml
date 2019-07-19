@@ -37,19 +37,22 @@
                 android:paddingTop="50dp">
 
                 <TextView
+                    android:layout_width="273dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/points"
+                    android:text="Points: " />
+
+                <Button
+                    android:id="@+id/add_points_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Points for the week of April 8, 2019: " />
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/add_points_button"
                     android:text="Add points" />
             </LinearLayout>
+
             <ProgressBar
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                 android:background="#DFDFDF"
                 android:progress="50" />
 
@@ -69,13 +72,15 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:text="Add Blood Pressure" />
-            </RelativeLayout >
+            </RelativeLayout>
+
             <ProgressBar
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                 android:background="#DFDFDF"
                 android:progress="50" />
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -88,16 +93,17 @@
                     android:text="Weight: " />
 
                 <Button
+                    android:id="@+id/add_weight_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:id="@+id/add_weight_button"
                     android:text="Add Weight" />
-            </RelativeLayout >
+            </RelativeLayout>
+
             <ProgressBar
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                 android:background="#DFDFDF"
                 android:progress="50" />
 
@@ -106,8 +112,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:text="You are logged in as: "
-                />
+                android:text="You are logged in as: " />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

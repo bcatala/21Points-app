@@ -24,11 +24,10 @@ public class preMenuActivity extends AppCompatActivity {
 
         Button mGotoMenu = (Button) findViewById(R.id.GotoMenu);
 
-        String a = getIntent().getStringExtra("email");
-        String b = getIntent().getStringExtra("c");
+        String email = getIntent().getStringExtra("email");
 
          TextView textView4= findViewById(R.id.textView4);
-         textView4.setText(a);
+         textView4.setText(email);
        //RestAPIManager.getInstance().getUserToken(getIntent().getExtras().getString(a), getIntent().getExtras().getString(b), R.layout.activity_login);
 
 
@@ -37,6 +36,7 @@ public class preMenuActivity extends AppCompatActivity {
             public void onClick(View v) {
             Intent i = new Intent(preMenuActivity.this, MainMenu.class);
             i.putExtra("username",getIntent().getStringExtra("email"));
+            i.putExtra("user", getIntent().getStringExtra("user"));
             startActivity(i);
             }
 
