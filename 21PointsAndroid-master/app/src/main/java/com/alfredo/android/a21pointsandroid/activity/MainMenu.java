@@ -32,6 +32,7 @@ public class MainMenu extends AppCompatActivity implements PointsAPICallBack, Us
     // UI references.
     private User user;
     private Points points;
+    private Intent i;
 
     @Override
     protected synchronized void onCreate(Bundle savedInstanceState) {
@@ -56,7 +57,8 @@ public class MainMenu extends AppCompatActivity implements PointsAPICallBack, Us
         mAddPointsButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainMenu.this, AddPoints.class);
+                i = new Intent(MainMenu.this, AddPoints.class);
+                putdata(i);
                 startActivity(i);
             }
         });
@@ -69,6 +71,10 @@ public class MainMenu extends AppCompatActivity implements PointsAPICallBack, Us
                 startActivity(i);
             }
         });
+    }
+
+    private void putdata(Intent i) {
+        i.putExtra("user", this.user.convertString());
     }
 
     private synchronized User getUserInfo(String user) {

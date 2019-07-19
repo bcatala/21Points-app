@@ -16,7 +16,7 @@
     <ScrollView
         android:id="@+id/login_form"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="677dp">
 
         <LinearLayout
             android:id="@+id/email_login_form"
@@ -29,62 +29,70 @@
                 android:layout_width="match_parent"
                 android:layout_height="147dp"
                 app:srcCompat="@drawable/original" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
                     android:text="Add Points"
-                    android:textSize="30dp"
-                    android:layout_marginTop="30dp"/>
+                    android:textSize="30dp" />
             </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Date"
-                android:textSize="20dp"
-                android:layout_marginTop="30dp"/>
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/darker_gray"
-                tools:text="@tools:sample/date/ddmmyy"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="20dp"
                 android:orientation="vertical">
+
                 <CheckBox
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Did you exercice?"/>
+                    android:text="Did you exercice?" />
+
                 <CheckBox
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Did you eat well?"/>
+                    android:text="Did you eat well?" />
+
                 <CheckBox
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Did you drink responsibly?"/>
+                    android:text="Did you drink responsibly?" />
             </LinearLayout>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="15dp"
                 android:text="Notes"
-                android:textSize="20dp"
-                android:layout_marginTop="15dp"/>
+                android:textSize="20dp" />
+
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="15dp"
                 android:text="@string/username"
-                android:textSize="20dp"
-                android:layout_marginTop="15dp"/>
+                android:textSize="20dp" />
+
+            <Button
+                android:id="@+id/post_points"
+                android:layout_width="match_parent"
+                android:layout_height="142dp"
+                android:text="Post Points" />
 
         </LinearLayout>
+
+
     </ScrollView>
+
+
+
 </LinearLayout>
