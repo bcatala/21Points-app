@@ -1,5 +1,6 @@
 package com.alfredo.android.a21pointsandroid.restapi;
 
+import com.alfredo.android.a21pointsandroid.model.Blood;
 import com.alfredo.android.a21pointsandroid.model.User;
 import com.alfredo.android.a21pointsandroid.model.Points;
 import com.alfredo.android.a21pointsandroid.model.UserData;
@@ -26,4 +27,6 @@ public interface RestAPIService {
     Call<User> getUserInfo(@Header("Authorization") String token);
     @GET("/api/account")
     Call<User> getUserAccount(@Header("Authorization") String token);
+    @GET("/api/blood-pressures/{id}")
+    Call<Blood> getBlood(@Path("id")      Integer id, @Header("Authorization") String token );
 }

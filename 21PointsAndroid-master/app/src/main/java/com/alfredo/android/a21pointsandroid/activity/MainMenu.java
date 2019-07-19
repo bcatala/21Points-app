@@ -40,6 +40,8 @@ public class MainMenu extends AppCompatActivity implements PointsAPICallBack, Us
 
         user = getUserInfo(getIntent().getStringExtra("user"));
 
+        RestAPIManager.getInstance().postPoints(new Points("4110-03-14",1,0,1, "alfreoaprova", user), this);
+
         TextView textView4= findViewById(R.id.logged_name);
         textView4.setText("You are logged in as " + getIntent().getStringExtra("username"));
 
@@ -80,7 +82,7 @@ public class MainMenu extends AppCompatActivity implements PointsAPICallBack, Us
 
         Log.d("21Points", "onPostPoints OK " + points.getId());
 
-        RestAPIManager.getInstance().getPointsById(this, user.getId());
+        RestAPIManager.getInstance().getPointsById(this,"aaa", user.getId());
 
     }
 

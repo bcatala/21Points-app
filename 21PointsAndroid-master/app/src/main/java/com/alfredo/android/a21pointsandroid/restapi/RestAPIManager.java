@@ -3,8 +3,10 @@ package com.alfredo.android.a21pointsandroid.restapi;
 import android.widget.TextView;
 
 import com.alfredo.android.a21pointsandroid.R;
+import com.alfredo.android.a21pointsandroid.model.Blood;
 import com.alfredo.android.a21pointsandroid.model.Points;
 import com.alfredo.android.a21pointsandroid.model.User;
+import com.alfredo.android.a21pointsandroid.restapi.callback.BloodAPICallBack;
 import com.alfredo.android.a21pointsandroid.restapi.callback.RegisterAPICallback;
 import com.alfredo.android.a21pointsandroid.model.UserData;
 import com.alfredo.android.a21pointsandroid.model.UserToken;
@@ -21,13 +23,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RestAPIManager {
 
     //private static final String BASE_URL = "http://" + "your_ip:8080/";
-    private static final String BASE_URL = "http://" + "android.byted.xyz/";
+    private static final String BASE_URL = "http://android.byted.xyz/";
     private static RestAPIManager ourInstance;
     private Retrofit retrofit;
     private RestAPIService restApiService;
     private UserToken userToken;
-    private String hola;
-
 
     public static RestAPIManager getInstance() {
         if (ourInstance == null) {
@@ -113,8 +113,9 @@ public class RestAPIManager {
     }
 
 
-    public synchronized void getPointsById(  final PointsAPICallBack pointsAPICallBack, Integer id) {
-        Call<Points> call = restApiService.getPointsById(id,"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImV4cCI6MTU2MzYxNzk1NH0.SWO2plvUJUYAQN9P_YNjR1DXrEkPWD5aVBXkkX_Cg4b56UbnZGWm1v8QrpaqrIrcHLMCtYwInzhQqp8FSySNZA");
+    public synchronized void getPointsById(  final PointsAPICallBack pointsAPICallBack,String token, Integer id) {
+        token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImV4cCI6MTU2MzYyMTg5MX0.FtN3ro4f3-hMNjqwiZ4tDCxn9ZTYQ5nJDTgdh_OSX0fmmL7ImnTw6sylRQHdR8DZckxviaobHXxdHjUr4KDirw";
+        Call<Points> call = restApiService.getPointsById(id,"Bearer " + userToken.getIdToken());
 
         call.enqueue(new Callback<Points>() {
             @Override
@@ -201,4 +202,25 @@ public class RestAPIManager {
             }
         });
     }*/
+
+    public synchronized void getBlood(Integer id , final BloodAPICallBack bloodAPICallBack) {
+        Call<Blood> call = restApiService.getBlood(id, "Bearer " + userToken.getIdToken());
+
+        call.enqueue(new Callback<Blood>() {
+            @Override
+            public void onResponse(Call<Blood> call, Response<Blood> response) {
+
+                if (response.isSuccessful()) {
+                    bloodAPICallBack.onGetBlood(response.body());
+                } else {
+                    bloodAPICallBack.onFailure(new Throwable("ERROR " + response.code() + ", " + response.raw().message()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Blood> call, Throwable t) {
+                bloodAPICallBack.onFailure(t);
+            }
+        });
+    }
 }

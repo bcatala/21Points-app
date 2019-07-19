@@ -17,8 +17,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.alfredo.android.a21pointsandroid.model.Blood;
 import com.alfredo.android.a21pointsandroid.model.User;
 import com.alfredo.android.a21pointsandroid.restapi.RestAPIService;
+import com.alfredo.android.a21pointsandroid.restapi.callback.BloodAPICallBack;
 import com.alfredo.android.a21pointsandroid.restapi.callback.LoginAPICallBack;
 import com.alfredo.android.a21pointsandroid.model.Points;
 import com.alfredo.android.a21pointsandroid.restapi.callback.PointsAPICallBack;
@@ -32,7 +34,7 @@ import retrofit2.Call;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity implements LoginAPICallBack, PointsAPICallBack, UserAPICallBack {
+public class LoginActivity extends AppCompatActivity implements LoginAPICallBack, PointsAPICallBack, UserAPICallBack, BloodAPICallBack {
 
     // UI references.
     private AutoCompleteTextView mEmailView;
@@ -188,11 +190,14 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
                 .show();
 
 
-        //RestAPIManager.getInstance().postPoints(new Points("2019-03-14",1,1,1), this);
+
         //RestAPIManager.getInstance().getUserInfo();
 
         this.token = userToken.getIdToken();
+
         RestAPIManager.getInstance().getUserAccount(this, token);
+
+        //RestAPIManager.getInstance().postPoints(new Points("4419-03-14",1,1,1), this);
 
 
     }
@@ -225,9 +230,9 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
     public void onGetUser(User body){
         this.user = body;
         System.out.println("HOLA");
-
-        RestAPIManager.getInstance().getPointsById(this, user.getId());
-
+        RestAPIManager.getInstance().getPointsById(this,token, user.getId());
+       // RestAPIManager.getInstance().getPointsById(this, user.getId());
+        //RestAPIManager.getInstance().getBlood(user.getId(), this);
         Intent i = new Intent(LoginActivity.this, preMenuActivity.class);
 
         i.putExtra("email", this.email);
@@ -239,6 +244,13 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
 
     @Override
     public void onGetUserInfo(User body){
+
+    }
+
+    public void onPostBlood(Blood blood){
+
+    }
+    public void onGetBlood(Blood blood){
 
     }
 }
