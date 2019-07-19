@@ -223,4 +223,26 @@ public class RestAPIManager {
             }
         });
     }
+
+    public synchronized void postBlood (Blood blood, final BloodAPICallBack bloodAPICallBack) {
+        final Blood newUserBlood = blood;
+        Call<Blood> call = restApiService.postBlood(newUserBlood, "Bearer " + userToken.getIdToken());
+
+        call.enqueue(new Callback<Blood>() {
+            @Override
+            public void onResponse(Call<Blood> call, Response<Blood> response) {
+
+                if (response.isSuccessful()) {
+                    bloodAPICallBack.onPostBlood(response.body());
+                } else {
+                    bloodAPICallBack.onFailure(new Throwable("ERROR " + response.code() + ", " + response.raw().message()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Blood> call, Throwable t) {
+                bloodAPICallBack.onFailure(t);
+            }
+        });
+    }
 }

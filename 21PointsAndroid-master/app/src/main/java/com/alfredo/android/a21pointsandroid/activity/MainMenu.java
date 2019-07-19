@@ -63,6 +63,16 @@ public class MainMenu extends AppCompatActivity implements PointsAPICallBack, Us
             }
         });
 
+        Button mAddBloodButton = (Button) findViewById(R.id.add_blood);
+        mAddBloodButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                i = new Intent(MainMenu.this, AddBlood.class);
+                putdata(i);
+                startActivity(i);
+            }
+        });
+
         Button mAddWeightButton = (Button) findViewById(R.id.add_weight_button);
         mAddWeightButton.setOnClickListener(new OnClickListener() {
             @Override

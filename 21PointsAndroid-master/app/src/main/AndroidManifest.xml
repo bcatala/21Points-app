@@ -22,6 +22,7 @@
             android:name=".activity.AddPoints"
             android:label="AddPoints">
         </activity>
+
         <activity
             android:name=".activity.AddWeight"
             android:label="AddWeight">
@@ -37,6 +38,10 @@
         <activity
             android:name=".activity.MainMenu"
             android:label="MainMenu">
+        </activity>
+        <activity
+        android:name=".activity.AddBlood"
+        android:label="AddBlood">
         </activity>
         <activity
             android:name=".activity.RegisterActivity"

@@ -49,16 +49,19 @@
                 android:orientation="vertical">
 
                 <CheckBox
+                    android:id="@+id/exercise_flag"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="Did you exercice?" />
 
                 <CheckBox
+                    android:id="@+id/meals_flag"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="Did you eat well?" />
 
                 <CheckBox
+                    android:id="@+id/alcohol_flag"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="Did you drink responsibly?" />
@@ -72,6 +75,7 @@
                 android:textSize="20dp" />
 
             <EditText
+                android:id="@+id/points_notes"
                 android:layout_width="match_parent"
                 android:layout_height="50dp" />
 
