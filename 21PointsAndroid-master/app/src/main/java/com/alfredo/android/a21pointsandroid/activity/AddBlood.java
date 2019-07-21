@@ -15,7 +15,9 @@ import com.alfredo.android.a21pointsandroid.restapi.RestAPIManager;
 import com.alfredo.android.a21pointsandroid.restapi.callback.BloodApiCallBack;
 import com.alfredo.android.a21pointsandroid.restapi.callback.PointsAPICallBack;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class AddBlood extends AppCompatActivity implements BloodApiCallBack {
 
@@ -29,7 +31,7 @@ public class AddBlood extends AppCompatActivity implements BloodApiCallBack {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_addblood);
 
-            Button postblood = (Button) findViewById(R.id.add_blood);
+            Button postblood = (Button) findViewById(R.id.post_Blood);
             postblood.setOnClickListener(new View.OnClickListener() {
 
 
@@ -39,6 +41,7 @@ public class AddBlood extends AppCompatActivity implements BloodApiCallBack {
                     bloodaux.setDiastolic(2);
                     bloodaux.setSystolic(2);
                     bloodaux.setUser(user);
+                    bloodaux.setTimestamp(Timestamp.valueOf("2019-04-12 11:08:00"));
                     RestAPIManager.getInstance().postBlood(bloodaux,getContext());
                 }
             });
