@@ -55,11 +55,17 @@ public class MainMenu extends AppCompatActivity implements PointsAPICallBack, Us
         Integer suma=LoginActivity.points.get(LoginActivity.points.size()-1).getAlcohol()+LoginActivity.points.get(LoginActivity.points.size()-1).getAlcohol()+
         LoginActivity.points.get(LoginActivity.points.size()-1).getAlcohol();
 
-        String string = "Points:" + suma.toString();
-        tvPoints.setText(string );
+        tvPoints.setText("Points: " + suma.toString());
 
         ProgressBar progressBarPoints = (ProgressBar) findViewById(R.id.ProgressPoint);
         progressBarPoints.setProgress((suma/3)*100);
+
+        TextView tvblood = (TextView) findViewById(R.id.blood);
+        String string2 = "Blood:   \nSystolic: " + LoginActivity.bloodArray.get(LoginActivity.points.size()-1).getSystolic()
+                + "\n Distolic: "+ LoginActivity.bloodArray.get(LoginActivity.points.size()-1).getDiastolic();
+
+        tvblood.setText(string2 );
+
 
 
         // Set up the mainMenu form.
@@ -78,7 +84,7 @@ public class MainMenu extends AppCompatActivity implements PointsAPICallBack, Us
             @Override
             public void onClick(View view) {
                 i = new Intent(MainMenu.this, AddBlood.class);
-                putdata(i);
+               // putdata(i);
                 startActivity(i);
             }
         });

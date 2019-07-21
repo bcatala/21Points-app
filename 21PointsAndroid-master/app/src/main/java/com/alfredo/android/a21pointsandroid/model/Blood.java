@@ -1,19 +1,20 @@
 package com.alfredo.android.a21pointsandroid.model;
 
 
+import java.sql.Timestamp;
 
 public class Blood {
 
 
     private Integer id;
 
-    private String timestamp;
+    private Timestamp timestamp;
 
     private Integer systolic;
 
     private Integer diastolic;
 
-    private Object user;
+    private User user;
 
     public Integer getId() {
         return id;
@@ -23,11 +24,11 @@ public class Blood {
         this.id = id;
     }
 
-    public String getTimestamp() {
+    public Timestamp getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(String timestamp) {
+    public void setTimestamp(Timestamp timestamp) {
         this.timestamp = timestamp;
     }
 
@@ -47,12 +48,11 @@ public class Blood {
         this.diastolic = diastolic;
     }
 
-    public Object getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(Object user) {
+    public void setUser(User user) {
         this.user = user;
     }
-
 }

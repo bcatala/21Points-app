@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.alfredo.android.a21pointsandroid.model.Blood;
 import com.alfredo.android.a21pointsandroid.model.User;
 import com.alfredo.android.a21pointsandroid.restapi.RestAPIService;
+import com.alfredo.android.a21pointsandroid.restapi.callback.BloodApiCallBack;
 import com.alfredo.android.a21pointsandroid.restapi.callback.LoginAPICallBack;
 import com.alfredo.android.a21pointsandroid.model.Points;
 import com.alfredo.android.a21pointsandroid.restapi.callback.PointsAPICallBack;
@@ -35,7 +36,7 @@ import retrofit2.Call;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity implements LoginAPICallBack, PointsAPICallBack, UserAPICallBack {
+public class LoginActivity extends AppCompatActivity implements LoginAPICallBack, PointsAPICallBack, UserAPICallBack,BloodApiCallBack {
 
     // UI references.
     private AutoCompleteTextView mEmailView;
@@ -43,10 +44,11 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
     private View mLoginFormView;
     private Button GotoMenu;
     public static ArrayList<Points> points;
+    public static ArrayList<Blood> bloodArray;
     public Points points3;
     private String email;
     private String password;
-    private User user;
+    public static User user;
     public static String token;
 
 
@@ -156,13 +158,7 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
         points = points2;
 
 
-        Intent i = new Intent(LoginActivity.this, preMenuActivity.class);
-
-        i.putExtra("email", this.email);
-        i.putExtra("c", this.password);
-        i.putExtra("user", this.user.convertString());
-
-        startActivity(i);
+       RestAPIManager.getInstance().getBlood(1,this);
 
         new AlertDialog.Builder(this)
                 .setTitle("Points")
@@ -259,7 +255,18 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
     public void onPostBlood(Blood blood){
 
     }
-    public void onGetBlood(Blood blood){
+    public void onGetBlood(ArrayList<Blood> blood){
+
+        bloodArray=blood;
+
+        Intent i = new Intent(LoginActivity.this, preMenuActivity.class);
+
+        i.putExtra("email", this.email);
+        i.putExtra("c", this.password);
+        i.putExtra("user", this.user.convertString());
+
+        startActivity(i);
+
 
     }
 }

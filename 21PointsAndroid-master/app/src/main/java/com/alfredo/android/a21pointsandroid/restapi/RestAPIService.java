@@ -31,8 +31,8 @@ public interface RestAPIService {
     Call<User> getUserInfo(@Header("Authorization") String token);
     @GET("/api/account")
     Call<User> getUserAccount(@Header("Authorization") String token);
-    @GET("/api/blood-pressures/{id}")
-    Call<ArrayList<Blood>> getBlood(@Path("id")      Integer id, @Header("Authorization") String token );
+    @GET("/api/blood-pressures")
+    Call<ArrayList<Blood>> getBlood( @Header("Authorization") String token );
     @POST("/api/blood")
     Call<Blood> postBlood(@Body Blood blood, @Header("Authorization") String token);
 }

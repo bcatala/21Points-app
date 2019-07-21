@@ -7,6 +7,7 @@ import com.alfredo.android.a21pointsandroid.activity.LoginActivity;
 import com.alfredo.android.a21pointsandroid.model.Blood;
 import com.alfredo.android.a21pointsandroid.model.Points;
 import com.alfredo.android.a21pointsandroid.model.User;
+import com.alfredo.android.a21pointsandroid.restapi.callback.BloodApiCallBack;
 import com.alfredo.android.a21pointsandroid.restapi.callback.RegisterAPICallback;
 import com.alfredo.android.a21pointsandroid.model.UserData;
 import com.alfredo.android.a21pointsandroid.model.UserToken;
@@ -224,12 +225,12 @@ public class RestAPIManager {
         });
     }*/
 
-   /* public synchronized void getBlood(Integer id , final BloodAPICallBack bloodAPICallBack) {
-        Call<Blood> call = restApiService.getBlood(id, "Bearer " + userToken.getIdToken());
+    public synchronized void getBlood(Integer id , final BloodApiCallBack bloodAPICallBack) {
+        Call<ArrayList<Blood>> call = restApiService.getBlood( "Bearer " + LoginActivity.token);
 
-        call.enqueue(new Callback<Blood>() {
+        call.enqueue(new Callback<ArrayList<Blood>>() {
             @Override
-            public void onResponse(Call<Blood> call, Response<Blood> response) {
+            public void onResponse(Call<ArrayList<Blood>> call, Response<ArrayList<Blood>> response) {
 
                 if (response.isSuccessful()) {
                     bloodAPICallBack.onGetBlood(response.body());
@@ -239,15 +240,15 @@ public class RestAPIManager {
             }
 
             @Override
-            public void onFailure(Call<Blood> call, Throwable t) {
+            public void onFailure(Call<ArrayList<Blood>> call, Throwable t) {
                 bloodAPICallBack.onFailure(t);
             }
         });
     }
 
-    public synchronized void postBlood (Blood blood, final BloodAPICallBack bloodAPICallBack) {
+    public synchronized void postBlood (Blood blood, final BloodApiCallBack bloodAPICallBack) {
         final Blood newUserBlood = blood;
-        Call<Blood> call = restApiService.postBlood(newUserBlood, "Bearer " + userToken.getIdToken());
+        Call<Blood> call = restApiService.postBlood(newUserBlood, "Bearer " + LoginActivity.token);
 
         call.enqueue(new Callback<Blood>() {
             @Override
@@ -265,5 +266,5 @@ public class RestAPIManager {
                 bloodAPICallBack.onFailure(t);
             }
         });
-    }*/
+    }
 }
