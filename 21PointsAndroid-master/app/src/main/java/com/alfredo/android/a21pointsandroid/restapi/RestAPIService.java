@@ -46,6 +46,6 @@ public interface RestAPIService {
 
     @GET("/api/weights")
     Call<ArrayList<Weight>> getWeight(@Header("Authorization") String token );
-    @POST("/api/blood-pressures")
-    Call<Blood> postWeight(@Header("Authorization") String token, @Body Weight weight);
+    @POST("/api/weights")
+    Call<Weight> postWeight(@Header("Authorization") String token, @Body Weight weight);
 }

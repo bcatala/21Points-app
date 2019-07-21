@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alfredo.android.a21pointsandroid.R;
 import com.alfredo.android.a21pointsandroid.model.Blood;
@@ -83,7 +84,7 @@ public class AddBlood extends AppCompatActivity implements BloodApiCallBack {
     public void PostBlood(Integer s,Integer d) {
 
         RestAPIManager.getInstance().postBlood(new Blood(("2020-04-12 11:08:00"),69,69,user),this);
-
+        Toast.makeText(AddBlood.this, "Posted!",Toast.LENGTH_LONG).show();
     }
     @Override
     public void onGetBlood(ArrayList<Blood> points) {

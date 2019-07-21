@@ -7,7 +7,13 @@ public class Weight {
 
     private Integer weight;
 
-    private Object user;
+    private User user;
+
+    public Weight(String timestamp, Integer weight, User user) {
+        this.timestamp = timestamp;
+        this.weight = weight;
+        this.user = user;
+    }
 
     public Integer getId() {
         return id;
@@ -33,11 +39,11 @@ public class Weight {
         this.weight = weight;
     }
 
-    public Object getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(Object user) {
+    public void setUser(User user) {
         this.user = user;
     }
 }

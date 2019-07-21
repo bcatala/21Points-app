@@ -7,10 +7,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alfredo.android.a21pointsandroid.R;
+import com.alfredo.android.a21pointsandroid.model.Weight;
+import com.alfredo.android.a21pointsandroid.restapi.RestAPIManager;
+import com.alfredo.android.a21pointsandroid.restapi.RestAPIService;
+import com.alfredo.android.a21pointsandroid.restapi.callback.WeightAPICallBack;
 
-public class AddWeight extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class AddWeight extends AppCompatActivity implements WeightAPICallBack {
     private int number_variable = 0;
 
     @Override
@@ -39,6 +46,36 @@ public class AddWeight extends AppCompatActivity {
             }
         });
 
+        Button mPostWeight = findViewById(R.id.button_post);
+
+        mPostWeight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                number_variable--;
+                RestAPIManager.getInstance().postWeight(new Weight(("2020-04-12 11:08:00"),number_variable,LoginActivity.user),getContext());
+                Toast.makeText(AddWeight.this, "Sent!",Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
 
+    public WeightAPICallBack getContext(){
+        return this;
+    }
+
+    @Override
+    public void onGetWeight(ArrayList<Weight> weight) {
+
+    }
+
+    @Override
+    public void onPostWeight(Weight weight) {
+
+    }
+
+    @Override
+    public void onFailure(Throwable t) {
+
+    }
 }

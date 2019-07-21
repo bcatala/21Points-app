@@ -272,6 +272,7 @@ public class RestAPIManager {
     }
 
 
+
     public synchronized void getWeight( final WeightAPICallBack WeightAPICallBack) {
         Call<ArrayList<Weight>> call = restApiService.getWeight( "Bearer " + LoginActivity.token);
 
@@ -291,6 +292,29 @@ public class RestAPIManager {
                 WeightAPICallBack.onFailure(t);
             }
         });
+    }
+
+    public synchronized void postWeight (Weight weight, final WeightAPICallBack weightAPICallBack) {
+        final Weight newUserWeight = weight;
+        Call<Weight> call = restApiService.postWeight( "Bearer " + LoginActivity.token ,weight);
+
+        call.enqueue(new Callback<Weight>() {
+            @Override
+            public void onResponse(Call<Weight> call, Response<Weight> response) {
+
+                if (response.isSuccessful()) {
+                    weightAPICallBack.onPostWeight(response.body());
+                } else {
+                    weightAPICallBack.onFailure(new Throwable("ERROR " + response.code() + ", " + response.raw().message()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Weight> call, Throwable t) {
+                weightAPICallBack.onFailure(t);
+            }
+        });
+
     }
 
 
