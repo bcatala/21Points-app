@@ -83,7 +83,10 @@ public class AddBlood extends AppCompatActivity implements BloodApiCallBack {
 
     public void PostBlood(Integer s,Integer d) {
 
-        RestAPIManager.getInstance().postBlood(new Blood(("2020-04-12 11:08:00"),69,69,user),this);
+        TextView systolic= findViewById(R.id.Systolic);
+        TextView diastolic= findViewById(R.id.Distolic);
+
+        RestAPIManager.getInstance().postBlood(new Blood(("2020-04-12 11:08:00"),Integer.parseInt(systolic.toString()),Integer.parseInt(diastolic.toString()),user),this);
         Toast.makeText(AddBlood.this, "Posted!",Toast.LENGTH_LONG).show();
     }
     @Override
