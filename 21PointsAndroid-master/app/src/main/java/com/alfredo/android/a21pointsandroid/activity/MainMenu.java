@@ -66,6 +66,10 @@ public class MainMenu extends AppCompatActivity implements PointsAPICallBack, Us
 
         tvblood.setText(string2 );
 
+        TextView tvweight = (TextView) findViewById(R.id.Weight);
+        String string3 = "Last Weight: " + LoginActivity.weightsarray.get(LoginActivity.weightsarray.size()-1).getWeight();
+
+        tvweight.setText(string3 );
 
 
         // Set up the mainMenu form.

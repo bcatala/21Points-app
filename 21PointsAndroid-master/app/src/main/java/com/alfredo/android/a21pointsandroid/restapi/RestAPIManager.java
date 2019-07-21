@@ -7,6 +7,7 @@ import com.alfredo.android.a21pointsandroid.activity.LoginActivity;
 import com.alfredo.android.a21pointsandroid.model.Blood;
 import com.alfredo.android.a21pointsandroid.model.Points;
 import com.alfredo.android.a21pointsandroid.model.User;
+import com.alfredo.android.a21pointsandroid.model.Weight;
 import com.alfredo.android.a21pointsandroid.restapi.callback.BloodApiCallBack;
 import com.alfredo.android.a21pointsandroid.restapi.callback.RegisterAPICallback;
 import com.alfredo.android.a21pointsandroid.model.UserData;
@@ -14,6 +15,7 @@ import com.alfredo.android.a21pointsandroid.model.UserToken;
 import com.alfredo.android.a21pointsandroid.restapi.callback.LoginAPICallBack;
 import com.alfredo.android.a21pointsandroid.restapi.callback.PointsAPICallBack;
 import com.alfredo.android.a21pointsandroid.restapi.callback.UserAPICallBack;
+import com.alfredo.android.a21pointsandroid.restapi.callback.WeightAPICallBack;
 
 import java.util.ArrayList;
 
@@ -248,7 +250,7 @@ public class RestAPIManager {
 
     public synchronized void postBlood (Blood blood, final BloodApiCallBack bloodAPICallBack) {
         final Blood newUserBlood = blood;
-        Call<Blood> call = restApiService.postBlood(newUserBlood, "Bearer " + LoginActivity.token);
+        Call<Blood> call = restApiService.postBlood( "Bearer " + LoginActivity.token ,blood);
 
         call.enqueue(new Callback<Blood>() {
             @Override
@@ -266,5 +268,30 @@ public class RestAPIManager {
                 bloodAPICallBack.onFailure(t);
             }
         });
+
     }
+
+
+    public synchronized void getWeight( final WeightAPICallBack WeightAPICallBack) {
+        Call<ArrayList<Weight>> call = restApiService.getWeight( "Bearer " + LoginActivity.token);
+
+        call.enqueue(new Callback<ArrayList<Weight>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Weight>> call, Response<ArrayList<Weight>> response) {
+
+                if (response.isSuccessful()) {
+                    WeightAPICallBack.onGetWeight(response.body());
+                } else {
+                    WeightAPICallBack.onFailure(new Throwable("ERROR " + response.code() + ", " + response.raw().message()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Weight>> call, Throwable t) {
+                WeightAPICallBack.onFailure(t);
+            }
+        });
+    }
+
+
 }

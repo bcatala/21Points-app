@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.alfredo.android.a21pointsandroid.model.Blood;
 import com.alfredo.android.a21pointsandroid.model.User;
+import com.alfredo.android.a21pointsandroid.model.Weight;
 import com.alfredo.android.a21pointsandroid.restapi.RestAPIService;
 import com.alfredo.android.a21pointsandroid.restapi.callback.BloodApiCallBack;
 import com.alfredo.android.a21pointsandroid.restapi.callback.LoginAPICallBack;
@@ -28,6 +29,7 @@ import com.alfredo.android.a21pointsandroid.R;
 import com.alfredo.android.a21pointsandroid.restapi.RestAPIManager;
 import com.alfredo.android.a21pointsandroid.model.UserToken;
 import com.alfredo.android.a21pointsandroid.restapi.callback.UserAPICallBack;
+import com.alfredo.android.a21pointsandroid.restapi.callback.WeightAPICallBack;
 
 import java.util.ArrayList;
 
@@ -36,7 +38,7 @@ import retrofit2.Call;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity implements LoginAPICallBack, PointsAPICallBack, UserAPICallBack,BloodApiCallBack {
+public class LoginActivity extends AppCompatActivity implements WeightAPICallBack,LoginAPICallBack, PointsAPICallBack, UserAPICallBack,BloodApiCallBack {
 
     // UI references.
     private AutoCompleteTextView mEmailView;
@@ -45,11 +47,13 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
     private Button GotoMenu;
     public static ArrayList<Points> points;
     public static ArrayList<Blood> bloodArray;
+    public static ArrayList<Weight> weightsarray;
     public Points points3;
     private String email;
     private String password;
     public static User user;
     public static String token;
+
 
 
     @Override
@@ -259,6 +263,17 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
 
         bloodArray=blood;
 
+        RestAPIManager.getInstance().getWeight(this);
+
+
+    }
+
+    @Override
+    public void onGetWeight(ArrayList<Weight> weight) {
+
+
+        weightsarray=weight;
+
         Intent i = new Intent(LoginActivity.this, preMenuActivity.class);
 
         i.putExtra("email", this.email);
@@ -267,6 +282,10 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
 
         startActivity(i);
 
+    }
+
+    @Override
+    public void onPostWeight(Weight weight) {
 
     }
 }
