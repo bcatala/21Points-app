@@ -15,6 +15,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.alfredo.android.a21pointsandroid.R;
@@ -27,11 +28,13 @@ import com.alfredo.android.a21pointsandroid.restapi.callback.RegisterAPICallback
 import com.alfredo.android.a21pointsandroid.restapi.RestAPIManager;
 import com.alfredo.android.a21pointsandroid.restapi.callback.UserAPICallBack;
 
+import java.util.ArrayList;
+
 
 public class MainMenu extends AppCompatActivity implements PointsAPICallBack, UserAPICallBack {
     // UI references.
     private User user;
-    private Points points;
+    private Points points2;
     private Intent i;
 
     @Override
@@ -41,15 +44,22 @@ public class MainMenu extends AppCompatActivity implements PointsAPICallBack, Us
 
         user = getUserInfo(getIntent().getStringExtra("user"));
 
-        RestAPIManager.getInstance().postPoints(new Points("4110-03-14",1,0,1, "alfreoaprova", user), this);
+        //RestAPIManager.getInstance().postPoints(new Points("4110-03-14",1,0,1, "alfredoaprova", user), this);
 
         TextView textView4= findViewById(R.id.logged_name);
         textView4.setText("You are logged in as " + getIntent().getStringExtra("username"));
 
         //RestAPIManager.getInstance().getPointsById(user.getId(),this);
 
-        TextView tvPoints = findViewById(R.id.points);
-        //tvPoints.setText(points.getAlcohol().toString() + points.getMeals().toString() + points.getExercise().toString());
+        TextView tvPoints = (TextView) findViewById(R.id.points);
+        Integer suma=LoginActivity.points.get(LoginActivity.points.size()-1).getAlcohol()+LoginActivity.points.get(LoginActivity.points.size()-1).getAlcohol()+
+        LoginActivity.points.get(LoginActivity.points.size()-1).getAlcohol();
+
+        String string = "Points:" + suma.toString();
+        tvPoints.setText(string );
+
+        ProgressBar progressBarPoints = (ProgressBar) findViewById(R.id.ProgressPoint);
+        progressBarPoints.setProgress((suma/3)*100);
 
 
         // Set up the mainMenu form.
@@ -98,16 +108,16 @@ public class MainMenu extends AppCompatActivity implements PointsAPICallBack, Us
 
         Log.d("21Points", "onPostPoints OK " + points.getId());
 
-        RestAPIManager.getInstance().getPointsById(this,"aaa", user.getId());
+       // RestAPIManager.getInstance().getPointsById(this,LoginActivity.token, user.getId());
 
     }
 
     @Override
-    public synchronized void onGetPoints(Points points) {
+    public synchronized void onGetPoints(ArrayList<Points> points) {
 
-        Log.d("21Points", "onGetPoints OK " + points.getId());
+        Log.d("21Points", "onGetPoints OK " + points2.getId());
 
-        this.points = points;
+        this.points2 = points.get(0);
 
         new AlertDialog.Builder(this)
                 .setTitle("Points")

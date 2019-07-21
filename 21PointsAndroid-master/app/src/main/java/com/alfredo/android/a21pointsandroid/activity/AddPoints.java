@@ -17,6 +17,7 @@ import com.alfredo.android.a21pointsandroid.model.User;
 import com.alfredo.android.a21pointsandroid.restapi.RestAPIManager;
 import com.alfredo.android.a21pointsandroid.restapi.callback.PointsAPICallBack;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.TimeZone;
 
@@ -90,12 +91,12 @@ public class AddPoints extends AppCompatActivity implements PointsAPICallBack {
 
         Log.d("21Points", "onPostPoints OK " + points.getId());
 
-        RestAPIManager.getInstance().getPointsById(this,"aaa", user.getId());
+       // RestAPIManager.getInstance().getPointsById(this,"aaa", user.getId());
 
     }
 
     @Override
-    public synchronized void onGetPoints(Points points) {
+    public synchronized void onGetPoints(ArrayList<Points> points) {
 
     }
 

@@ -6,6 +6,8 @@ import com.alfredo.android.a21pointsandroid.model.Points;
 import com.alfredo.android.a21pointsandroid.model.UserData;
 import com.alfredo.android.a21pointsandroid.model.UserToken;
 
+import java.util.ArrayList;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -18,7 +20,9 @@ public interface RestAPIService {
     @POST("/api/points")
     Call<Points> postPoints(@Body Points points, @Header("Authorization") String token);
     @GET("/api/points/{id}")
-        Call<Points> getPointsById(@Path("id")      Integer id, @Header("Authorization") String token );
+        Call<Points> getPointsById(@Path("id") Integer id, @Header("Authorization") String token );
+    @GET("/api/points")
+    Call<ArrayList<Points>> getPoints(@Header("Authorization") String token );
     @POST("/api/authenticate")
     Call<UserToken> requestToken(@Body UserData userData);
     @POST("/api/register")
@@ -28,7 +32,7 @@ public interface RestAPIService {
     @GET("/api/account")
     Call<User> getUserAccount(@Header("Authorization") String token);
     @GET("/api/blood-pressures/{id}")
-    Call<Blood> getBlood(@Path("id")      Integer id, @Header("Authorization") String token );
+    Call<ArrayList<Blood>> getBlood(@Path("id")      Integer id, @Header("Authorization") String token );
     @POST("/api/blood")
     Call<Blood> postBlood(@Body Blood blood, @Header("Authorization") String token);
 }

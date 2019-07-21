@@ -20,7 +20,6 @@ import android.widget.TextView;
 import com.alfredo.android.a21pointsandroid.model.Blood;
 import com.alfredo.android.a21pointsandroid.model.User;
 import com.alfredo.android.a21pointsandroid.restapi.RestAPIService;
-import com.alfredo.android.a21pointsandroid.restapi.callback.BloodAPICallBack;
 import com.alfredo.android.a21pointsandroid.restapi.callback.LoginAPICallBack;
 import com.alfredo.android.a21pointsandroid.model.Points;
 import com.alfredo.android.a21pointsandroid.restapi.callback.PointsAPICallBack;
@@ -29,23 +28,26 @@ import com.alfredo.android.a21pointsandroid.restapi.RestAPIManager;
 import com.alfredo.android.a21pointsandroid.model.UserToken;
 import com.alfredo.android.a21pointsandroid.restapi.callback.UserAPICallBack;
 
+import java.util.ArrayList;
+
 import retrofit2.Call;
 
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity implements LoginAPICallBack, PointsAPICallBack, UserAPICallBack, BloodAPICallBack {
+public class LoginActivity extends AppCompatActivity implements LoginAPICallBack, PointsAPICallBack, UserAPICallBack {
 
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
     private View mLoginFormView;
     private Button GotoMenu;
-    private Points points;
+    public static ArrayList<Points> points;
+    public Points points3;
     private String email;
     private String password;
     private User user;
-    private String token;
+    public static String token;
 
 
     @Override
@@ -145,11 +147,22 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
     }
 
     @Override
-    public void onGetPoints(Points points) {
+    public void onGetPoints(ArrayList<Points> points2) {
 
-        Log.d("21Points", "onGetPoints OK " + points.getId());
+        //Log.d("21Points", "onGetPoints OK " + points.getId());
 
-        this.points = points;
+
+
+        points = points2;
+
+
+        Intent i = new Intent(LoginActivity.this, preMenuActivity.class);
+
+        i.putExtra("email", this.email);
+        i.putExtra("c", this.password);
+        i.putExtra("user", this.user.convertString());
+
+        startActivity(i);
 
         new AlertDialog.Builder(this)
                 .setTitle("Points")
@@ -185,6 +198,8 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
                 })
 
                 // A null listener allows the button to dismiss the dialog and take no further action.
+
+
                 .setNegativeButton(android.R.string.no, null)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
@@ -193,7 +208,7 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
 
         //RestAPIManager.getInstance().getUserInfo();
 
-        this.token = userToken.getIdToken();
+        token = userToken.getIdToken();
 
         RestAPIManager.getInstance().getUserAccount(this, token);
 
@@ -230,16 +245,10 @@ public class LoginActivity extends AppCompatActivity implements LoginAPICallBack
     public void onGetUser(User body){
         this.user = body;
         System.out.println("HOLA");
-        RestAPIManager.getInstance().getPointsById(this,token, user.getId());
+        RestAPIManager.getInstance().getPoints(this,token,1);
        // RestAPIManager.getInstance().getPointsById(this, user.getId());
         //RestAPIManager.getInstance().getBlood(user.getId(), this);
-        Intent i = new Intent(LoginActivity.this, preMenuActivity.class);
 
-        i.putExtra("email", this.email);
-        i.putExtra("c", this.password);
-        i.putExtra("user", this.user.convertString());
-
-        startActivity(i);
     }
 
     @Override
