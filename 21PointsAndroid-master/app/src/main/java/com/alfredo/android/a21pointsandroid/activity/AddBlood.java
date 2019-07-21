@@ -3,6 +3,7 @@ package com.alfredo.android.a21pointsandroid.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -24,7 +25,7 @@ public class AddBlood extends AppCompatActivity implements BloodApiCallBack {
         private User user;
         private String notes;
         private int systolic,dystolic;
-        public Blood bloodaux;
+        private Blood bloodaux;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -35,14 +36,13 @@ public class AddBlood extends AppCompatActivity implements BloodApiCallBack {
             postblood.setOnClickListener(new View.OnClickListener() {
 
 
+                //bloodaux.setTimestamp(Timestamp.valueOf("3019-04-12 11:08:00"));
 
                 @Override
                 public void onClick(View v) {
-                    bloodaux.setDiastolic(2);
-                    bloodaux.setSystolic(2);
-                    bloodaux.setUser(user);
-                    bloodaux.setTimestamp(Timestamp.valueOf("2019-04-12 11:08:00"));
-                    RestAPIManager.getInstance().postBlood(bloodaux,getContext());
+
+                    PostBlood(2,2);
+
                 }
             });
 
@@ -75,10 +75,16 @@ public class AddBlood extends AppCompatActivity implements BloodApiCallBack {
     @Override
     public void onPostBlood(Blood blood) {
 
-
+        Log.d("21Points", "onPostPoints OK " + blood.getId());
 
     }
 
+
+    public void PostBlood(Integer s,Integer d) {
+
+        RestAPIManager.getInstance().postBlood(new Blood(("2020-04-12 11:08:00"),69,69,user),this);
+
+    }
     @Override
     public void onGetBlood(ArrayList<Blood> points) {
 
@@ -87,5 +93,15 @@ public class AddBlood extends AppCompatActivity implements BloodApiCallBack {
     @Override
     public void onFailure(Throwable t) {
 
+    }
+
+    public void setBloodaux(Blood bloodaux) {
+        this.bloodaux = bloodaux;
+    }
+
+    public Blood getBloodaux(){
+
+
+            return bloodaux;
     }
 }

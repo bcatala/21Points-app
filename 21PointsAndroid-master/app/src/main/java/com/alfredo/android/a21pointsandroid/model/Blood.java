@@ -8,13 +8,21 @@ public class Blood {
 
     private Integer id;
 
-    private Timestamp timestamp;
+    private String timestamp;
 
     private Integer systolic;
 
     private Integer diastolic;
 
     private User user;
+
+    public Blood( String timestamp, Integer systolic, Integer diastolic, User user) {
+        this.id = id;
+        this.timestamp = timestamp;
+        this.systolic = systolic;
+        this.diastolic = diastolic;
+        this.user = user;
+    }
 
     public Integer getId() {
         return id;
@@ -24,11 +32,11 @@ public class Blood {
         this.id = id;
     }
 
-    public Timestamp getTimestamp() {
+    public String getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(Timestamp timestamp) {
+    public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
 
