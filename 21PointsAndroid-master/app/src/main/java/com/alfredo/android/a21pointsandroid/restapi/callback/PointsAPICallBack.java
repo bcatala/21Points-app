@@ -8,4 +8,5 @@ import java.util.ArrayList;
 public interface PointsAPICallBack extends RestAPICallBack {
     void onPostPoints(Points points);
     void onGetPoints(ArrayList<Points> points);
+    void onGetPointsWeek(Points points);
 }

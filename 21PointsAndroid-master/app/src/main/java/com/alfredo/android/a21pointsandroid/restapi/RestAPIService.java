@@ -24,6 +24,8 @@ public interface RestAPIService {
         Call<Points> getPointsById(@Path("id") Integer id, @Header("Authorization") String token );
     @GET("/api/points")
     Call<ArrayList<Points>> getPoints(@Header("Authorization") String token );
+    @GET("/api/points-by-week/{date}")
+    Call<Points> getPointsByWeek(@Path("date") String date, @Header("Authorization") String token);
 
 
     @POST("/api/authenticate")

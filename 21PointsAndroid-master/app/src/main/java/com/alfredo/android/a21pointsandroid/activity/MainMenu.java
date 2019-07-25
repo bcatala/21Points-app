@@ -136,6 +136,11 @@ public class MainMenu extends AppCompatActivity implements PointsAPICallBack, Us
     }
 
     @Override
+    public void onGetPointsWeek(Points points) {
+
+    }
+
+    @Override
     public void onFailure(Throwable t) {
 
         Log.d("21Points", "onFailure OK " + t.getMessage());

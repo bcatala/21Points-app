@@ -171,6 +171,11 @@ public class LoginActivity extends AppCompatActivity implements WeightAPICallBac
     }
 
     @Override
+    public void onGetPointsWeek(Points points) {
+
+    }
+
+    @Override
     public void onPostPoints(Points points) {
 
         Log.d("21Points", "onPostPoints OK " + points.getId());

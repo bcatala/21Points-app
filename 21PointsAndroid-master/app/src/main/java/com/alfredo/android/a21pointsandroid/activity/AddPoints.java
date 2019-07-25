@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alfredo.android.a21pointsandroid.R;
 import com.alfredo.android.a21pointsandroid.model.Points;
@@ -78,6 +79,7 @@ public class AddPoints extends AppCompatActivity implements PointsAPICallBack {
         }
         RestAPIManager.getInstance().postPoints(new Points(Integer.toString(year) + "-" + month_aux + "-" + Integer.toString(day)
                 ,exercise,meals,alcohol, notes, user), this);
+        Toast.makeText(AddPoints.this, "Posted!",Toast.LENGTH_LONG).show();
     }
 
     private synchronized User getUserInfo(String user) {
@@ -98,6 +100,11 @@ public class AddPoints extends AppCompatActivity implements PointsAPICallBack {
     @Override
     public synchronized void onGetPoints(ArrayList<Points> points) {
 
+    }
+
+    @Override
+    public void onGetPointsWeek(Points points) {
+        
     }
 
 
