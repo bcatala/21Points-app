@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.alfredo.android.a21pointsandroid.R;
 import com.alfredo.android.a21pointsandroid.model.Points;
+import com.alfredo.android.a21pointsandroid.model.PointsWeek;
 import com.alfredo.android.a21pointsandroid.model.User;
 import com.alfredo.android.a21pointsandroid.model.UserToken;
 import com.alfredo.android.a21pointsandroid.restapi.callback.LoginAPICallBack;
@@ -52,13 +53,12 @@ public class MainMenu extends AppCompatActivity implements PointsAPICallBack, Us
         //RestAPIManager.getInstance().getPointsById(user.getId(),this);
 
         TextView tvPoints = (TextView) findViewById(R.id.points);
-        Integer suma=LoginActivity.points.get(LoginActivity.points.size()-1).getAlcohol()+LoginActivity.points.get(LoginActivity.points.size()-1).getAlcohol()+
-        LoginActivity.points.get(LoginActivity.points.size()-1).getAlcohol();
 
-        tvPoints.setText("Points: " + suma.toString());
+
+        tvPoints.setText("Points: " + LoginActivity.pointsWeek.getPoints().toString());
 
         ProgressBar progressBarPoints = (ProgressBar) findViewById(R.id.ProgressPoint);
-        progressBarPoints.setProgress((suma/3)*100);
+        progressBarPoints.setProgress((LoginActivity.pointsWeek.getPoints()/(21))*100);
 
         TextView tvblood = (TextView) findViewById(R.id.blood);
         String string2 = "Blood:   \nSystolic: " + LoginActivity.bloodArray.get(LoginActivity.points.size()-1).getSystolic()
@@ -136,9 +136,12 @@ public class MainMenu extends AppCompatActivity implements PointsAPICallBack, Us
     }
 
     @Override
-    public void onGetPointsWeek(Points points) {
+    public void onGetPointsWeek(PointsWeek points) {
 
     }
+
+
+
 
     @Override
     public void onFailure(Throwable t) {

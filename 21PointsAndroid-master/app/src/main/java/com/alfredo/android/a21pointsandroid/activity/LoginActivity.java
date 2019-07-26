@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.alfredo.android.a21pointsandroid.model.Blood;
+import com.alfredo.android.a21pointsandroid.model.PointsWeek;
 import com.alfredo.android.a21pointsandroid.model.User;
 import com.alfredo.android.a21pointsandroid.model.Weight;
 import com.alfredo.android.a21pointsandroid.restapi.RestAPIService;
@@ -53,7 +54,7 @@ public class LoginActivity extends AppCompatActivity implements WeightAPICallBac
     private String password;
     public static User user;
     public static String token;
-    public static Points pointsWeek;
+    public static PointsWeek pointsWeek;
 
 
 
@@ -172,7 +173,7 @@ public class LoginActivity extends AppCompatActivity implements WeightAPICallBac
     }
 
     @Override
-    public void onGetPointsWeek(Points points) {
+    public void onGetPointsWeek(PointsWeek points) {
 
         this.pointsWeek = points;
         Intent i = new Intent(LoginActivity.this, preMenuActivity.class);
@@ -288,7 +289,9 @@ public class LoginActivity extends AppCompatActivity implements WeightAPICallBac
 
         weightsarray=weight;
 
-        RestAPIManager.getInstance().getPointsByWeek("2019-07-22", this);
+
+
+        RestAPIManager.getInstance().getPointsByWeek("2019-07-26", this);
 
 
 

@@ -6,6 +6,7 @@ import com.alfredo.android.a21pointsandroid.R;
 import com.alfredo.android.a21pointsandroid.activity.LoginActivity;
 import com.alfredo.android.a21pointsandroid.model.Blood;
 import com.alfredo.android.a21pointsandroid.model.Points;
+import com.alfredo.android.a21pointsandroid.model.PointsWeek;
 import com.alfredo.android.a21pointsandroid.model.User;
 import com.alfredo.android.a21pointsandroid.model.Weight;
 import com.alfredo.android.a21pointsandroid.restapi.callback.BloodApiCallBack;
@@ -17,6 +18,7 @@ import com.alfredo.android.a21pointsandroid.restapi.callback.PointsAPICallBack;
 import com.alfredo.android.a21pointsandroid.restapi.callback.UserAPICallBack;
 import com.alfredo.android.a21pointsandroid.restapi.callback.WeightAPICallBack;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -163,11 +165,11 @@ public class RestAPIManager {
     }
 
     public synchronized void getPointsByWeek(String date, final PointsAPICallBack pointsAPICallBack) {
-        Call<Points> call = restApiService.getPointsByWeek(date, "Bearer " + userToken.getIdToken());
+        Call<PointsWeek> call = restApiService.getPointsByWeek( "Bearer " + userToken.getIdToken());
 
-        call.enqueue(new Callback<Points>() {
+        call.enqueue(new Callback<PointsWeek>() {
             @Override
-            public void onResponse(Call<Points> call, Response<Points> response) {
+            public void onResponse(Call<PointsWeek> call, Response<PointsWeek> response) {
 
                 if (response.isSuccessful()) {
                     pointsAPICallBack.onGetPointsWeek(response.body());
@@ -177,7 +179,7 @@ public class RestAPIManager {
             }
 
             @Override
-            public void onFailure(Call<Points> call, Throwable t) {
+            public void onFailure(Call<PointsWeek> call, Throwable t) {
                 pointsAPICallBack.onFailure(t);
             }
         });

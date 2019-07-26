@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.alfredo.android.a21pointsandroid.R;
 import com.alfredo.android.a21pointsandroid.model.Points;
+import com.alfredo.android.a21pointsandroid.model.PointsWeek;
 import com.alfredo.android.a21pointsandroid.model.User;
 import com.alfredo.android.a21pointsandroid.restapi.RestAPIManager;
 import com.alfredo.android.a21pointsandroid.restapi.callback.PointsAPICallBack;
@@ -103,7 +104,7 @@ public class AddPoints extends AppCompatActivity implements PointsAPICallBack {
     }
 
     @Override
-    public void onGetPointsWeek(Points points) {
+    public void onGetPointsWeek(PointsWeek points) {
         
     }
 

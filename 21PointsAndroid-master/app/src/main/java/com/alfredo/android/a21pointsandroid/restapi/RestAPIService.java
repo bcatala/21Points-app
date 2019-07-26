@@ -1,6 +1,7 @@
 package com.alfredo.android.a21pointsandroid.restapi;
 
 import com.alfredo.android.a21pointsandroid.model.Blood;
+import com.alfredo.android.a21pointsandroid.model.PointsWeek;
 import com.alfredo.android.a21pointsandroid.model.User;
 import com.alfredo.android.a21pointsandroid.model.Points;
 import com.alfredo.android.a21pointsandroid.model.UserData;
@@ -8,6 +9,7 @@ import com.alfredo.android.a21pointsandroid.model.UserToken;
 import com.alfredo.android.a21pointsandroid.model.Weight;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -24,8 +26,9 @@ public interface RestAPIService {
         Call<Points> getPointsById(@Path("id") Integer id, @Header("Authorization") String token );
     @GET("/api/points")
     Call<ArrayList<Points>> getPoints(@Header("Authorization") String token );
-    @GET("/api/points-by-week/{date}")
-    Call<Points> getPointsByWeek(@Path("date") String date, @Header("Authorization") String token);
+
+    @GET("/api/points-this-week")
+    Call<PointsWeek> getPointsByWeek(@Header("Authorization") String token);
 
 
     @POST("/api/authenticate")
