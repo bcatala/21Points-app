@@ -53,6 +53,7 @@ public class LoginActivity extends AppCompatActivity implements WeightAPICallBac
     private String password;
     public static User user;
     public static String token;
+    public static Points pointsWeek;
 
 
 
@@ -173,6 +174,14 @@ public class LoginActivity extends AppCompatActivity implements WeightAPICallBac
     @Override
     public void onGetPointsWeek(Points points) {
 
+        this.pointsWeek = points;
+        Intent i = new Intent(LoginActivity.this, preMenuActivity.class);
+
+        i.putExtra("email", this.email);
+        i.putExtra("c", this.password);
+        i.putExtra("user", this.user.convertString());
+
+        startActivity(i);
     }
 
     @Override
@@ -279,13 +288,9 @@ public class LoginActivity extends AppCompatActivity implements WeightAPICallBac
 
         weightsarray=weight;
 
-        Intent i = new Intent(LoginActivity.this, preMenuActivity.class);
+        RestAPIManager.getInstance().getPointsByWeek("2019-07-22", this);
 
-        i.putExtra("email", this.email);
-        i.putExtra("c", this.password);
-        i.putExtra("user", this.user.convertString());
 
-        startActivity(i);
 
     }
 
